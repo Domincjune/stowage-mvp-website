@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShipIQ.ai - Intelligent Stowage Planning</title>
+    <style>
+        :root {
+            --primary: #005f87;
+            --secondary: #00a8e8;
+            --accent: #ff7e00;
+            --light: #f8f9fa;
+            --dark: #212529;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 4rem 1rem;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .slogan {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .features {
+            padding: 4rem 0;
+            background-color: var(--light);
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .how-it-works {
+            padding: 4rem 0;
+        }
+        
+        .steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+        
+        .step {
+            flex: 0 0 calc(33.333% - 2rem);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .step-number {
+            background-color: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .testimonials {
+            background-color: var(--primary);
+            color: white;
+            padding: 4rem 0;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .testimonial {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 8px;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .step {
+                flex: 0 0 100%;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <section class="hero">
+        <div class="container">
+            <h1>ShipIQ.ai</h1>
+            <p class="slogan">From Docks to Data</p>
+            <p>Revolutionizing maritime logistics with AI-powered stowage planning</p>
+            <a href="#contact" class="cta-button">Request Demo</a>
+        </div>
+    </section>
+    
+    <section class="features">
+        <div class="container">
+            <h2>Transform Your Cargo Operations</h2>
+            <p>Our intelligent platform helps captains focus on trade rather than stowage planning, saving valuable time and optimizing cargo operations.</p>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>AI-Powered Planning</h3>
+                    <p>Our algorithms learn from real captains' decisions and stability principles to create optimal stowage plans.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Historical Data Utilization</h3>
+                    <p>Leverage past stowage data to quickly confirm cargo feasibility and avoid previous mistakes.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Optimized Cargo Loading</h3>
+                    <p>Maximize your vessel's capacity with intelligent stowage suggestions that consider all constraints.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="how-it-works">
+        <div class="container">
+            <h2>How ShipIQ.ai Works</h2>
+            <p>Our system transforms the traditional stowage planning process into an intelligent, data-driven operation.</p>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Data Collection</h3>
+                    <p>We collect and analyze past voyage data, stowage records, and port characteristics to build our knowledge base.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Smart Search</h3>
+                    <p>Operators search for similar past cases based on cargo, routes, and restrictions.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Intelligent Suggestions</h3>
+                    <p>The system recommends optimal stowage patterns and highlights potential risks.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Automated Communication</h3>
+                    <p>Generate complete stowage plans with automated emails to vessels including all critical information.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <h3>Final Adjustment</h3>
+                    <p>Captains review and make final adjustments with full context from historical data.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">6</div>
+                    <h3>Continuous Learning</h3>
+                    <p>Actual voyage data feeds back into the system, improving future recommendations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="testimonials">
+        <div class="container">
+            <h2>Trusted by Maritime Professionals</h2>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <p>"ShipIQ.ai reduced our stowage planning time by 70%, allowing us to secure more spot cargoes."</p>
+                    <p><strong>— Chief Operations Officer</strong><br>Major Tanker Operator</p>
+                </div>
+                
+                <div class="testimonial">
+                    <p>"The AI suggestions have helped us optimize our cargo loading beyond what we thought was possible."</p>
+                    <p><strong>— Fleet Captain</strong><br>International Shipping Company</p>
+                </div>
+                
+                <div class="testimonial">
+                    <p>"Finally, a system that captures and utilizes all those discarded stowage plans we used to generate."</p>
+                    <p><strong>— Chartering Manager</strong><br>Oil Trading Firm</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact" class="container" style="padding: 4rem 0;">
+        <h2>Ready to Transform Your Stowage Planning?</h2>
+        <p>Contact us to schedule a demo and see how ShipIQ.ai can benefit your operations.</p>
+        
+        <form style="max-width: 600px; margin: 2rem auto;">
+            <div style="margin-bottom: 1rem;">
+                <label for="name" style="display: block; margin-bottom: 0.5rem;">Name</label>
+                <input type="text" id="name" style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+            </div>
+            
+            <div style="margin-bottom: 1rem;">
+                <label for="email" style="display: block; margin-bottom: 0.5rem;">Email</label>
+                <input type="email" id="email" style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+            </div>
+            
+            <div style="margin-bottom: 1rem;">
+                <label for="company" style="display: block; margin-bottom: 0.5rem;">Company</label>
+                <input type="text" id="company" style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+            </div>
+            
+            <div style="margin-bottom: 1rem;">
+                <label for="message" style="display: block; margin-bottom: 0.5rem;">Message</label>
+                <textarea id="message" rows="4" style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+            </div>
+            
+            <button type="submit" class="cta-button" style="border: none; cursor: pointer;">Request Demo</button>
+        </form>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 ShipIQ.ai. All rights reserved.</p>
+            <p>From Docks to Data — Intelligent Maritime Logistics</p>
+        </div>
+    </footer>
+</body>
+</html>
