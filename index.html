@@ -4,308 +4,557 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ShipIQ.ai - Intelligent Stowage Planning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@500;700&display=swap">
     <style>
         :root {
-            --primary: #005f87;
-            --secondary: #00a8e8;
-            --accent: #ff7e00;
-            --light: #f8f9fa;
-            --dark: #212529;
+            --primary: #2463EB; /* Dark blue */
+            --secondary: #EDC542; /* Golden yellow */
+            --accent: #EDC542;
+            --light: #F8FAFC;
+            --dark: #141414; /* Dark gray */
+            --text: #141414;
+            --text-light: #F8FAFC;
         }
-        
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif;
             margin: 0;
             padding: 0;
-            color: var(--dark);
+            color: var(--text);
             line-height: 1.6;
-        }
-        
-        .hero {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 4rem 1rem;
-            text-align: center;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-        
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-        
-        .slogan {
-            font-size: 1.5rem;
-            font-weight: 300;
-            margin-bottom: 2rem;
-        }
-        
-        .cta-button {
-            display: inline-block;
-            background-color: var(--accent);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-        }
-        
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        .features {
-            padding: 4rem 0;
             background-color: var(--light);
         }
-        
+
+        .header {
+            background-color: var(--primary);
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-right: 0.75rem;
+        }
+
+        .tagline {
+            color: var(--text-light);
+            font-style: italic;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        nav a {
+            color: var(--text-light);
+            margin: 0 1.25rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--secondary);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary), rgba(12, 33, 161, 0.8));
+            color: var(--text-light);
+            padding: 7rem 1.5rem 5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="100" cy="100" r="100" fill="rgba(255,255,255,0.05)"/></svg>') repeat;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 1.25rem;
+            color: var(--light);
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            font-size: 2.25rem;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 5px;
+            background-color: var(--secondary);
+            border-radius: 2px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--light);
+            color: var(--dark);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            background-color: #F7CF4C;
+        }
+
+        .features {
+            padding: 5rem 0;
+            background-color: white;
+        }
+
         .feature-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2rem;
-            margin-top: 2rem;
+            margin-top: 3rem;
         }
-        
+
         .feature-card {
             background: white;
-            border-radius: 8px;
-            padding: 2rem;
+            border-radius: 12px;
+            padding: 2.5rem;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
+            border-left: 5px solid var(--secondary);
         }
-        
+
         .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
-        
+
         .feature-icon {
-            font-size: 2.5rem;
-            color: var(--secondary);
-            margin-bottom: 1rem;
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
         }
-        
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1);
+        }
+
         .how-it-works {
-            padding: 4rem 0;
+            padding: 5rem 0;
+            background-color: var(--light);
         }
-        
+
         .steps {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
-            margin-top: 2rem;
+            margin-top: 3rem;
         }
-        
+
         .step {
             flex: 0 0 calc(33.333% - 2rem);
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             position: relative;
+            padding-left: 70px;
         }
-        
+
         .step-number {
             background-color: var(--primary);
-            color: white;
-            width: 40px;
-            height: 40px;
+            color: var(--light);
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            margin-bottom: 1rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
-        
+
         .testimonials {
             background-color: var(--primary);
-            color: white;
-            padding: 4rem 0;
+            color: var(--text-light);
+            padding: 5rem 0;
+            position: relative;
         }
-        
+
         .testimonial-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2rem;
-            margin-top: 2rem;
+            margin-top: 3rem;
         }
-        
+
         .testimonial {
             background: rgba(255, 255, 255, 0.1);
-            padding: 2rem;
-            border-radius: 8px;
+            padding: 2.5rem;
+            border-radius: 12px;
+            border-left: 5px solid var(--secondary);
+            transition: transform 0.3s ease;
         }
-        
+
+        .testimonial:hover {
+            transform: translateY(-5px);
+        }
+
+        .testimonial strong {
+            color: var(--secondary);
+            font-family: 'Poppins', sans-serif;
+        }
+
         footer {
             background-color: var(--dark);
-            color: white;
-            padding: 2rem 0;
+            color: var(--text-light);
+            padding: 4rem 0;
             text-align: center;
         }
-        
+
+        .footer-logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-form {
+            max-width: 700px;
+            margin: 3rem auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.75rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.75rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #E2E8F0;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--secondary);
+            outline: none;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-message {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .form-message.success {
+            display: block;
+            background-color: #D4F4DD;
+            color: #1A7F37;
+        }
+
+        .form-message.error {
+            display: block;
+            background-color: #FEE2E2;
+            color: #B91C1C;
+        }
+
         @media (max-width: 768px) {
             .step {
                 flex: 0 0 100%;
             }
-            
+
             h1 {
                 font-size: 2.5rem;
             }
+
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo-container {
+                margin-bottom: 1.5rem;
+            }
+
+            nav a {
+                margin: 0.5rem 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .cta-button {
+                padding: 0.75rem 1.5rem;
+                font-size: 1rem;
+            }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+    <header class="header">
+        <div class="logo-container">
+            <div class="logo">shipIQ</div>
+            <div class="tagline">From dock to data</div>
+        </div>
+        <nav>
+            <a href="#features">Features</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
     <section class="hero">
         <div class="container">
-            <h1>ShipIQ.ai</h1>
-            <p class="slogan">From Docks to Data</p>
-            <p>Revolutionizing maritime logistics with AI-powered stowage planning</p>
-            <a href="#contact" class="cta-button">Request Demo</a>
+            <h1>AI-Powered Stowage Planning</h1>
+            <p style="font-size: 1.25rem; max-width: 800px; margin: 0 auto 2rem;">Revolutionize maritime logistics with intelligent stowage solutions inspired by real captains and stability principles.</p>
+            <a href="#contact" class="cta-button">Request a Demo</a>
         </div>
     </section>
-    
-    <section class="features">
+
+    <section id="features" class="features">
         <div class="container">
-            <h2>Transform Your Cargo Operations</h2>
-            <p>Our intelligent platform helps captains focus on trade rather than stowage planning, saving valuable time and optimizing cargo operations.</p>
-            
+            <h2>Optimize Your Cargo Operations</h2>
+            <p style="margin: 1rem auto 0;">Empower captains to focus on trade with time-saving, AI-driven stowage planning for seamless cargo operations.</p>
+
             <div class="feature-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-brain"></i>
                     </div>
-                    <h3>AI-Powered Planning</h3>
-                    <p>Our algorithms learn from real captains' decisions and stability principles to create optimal stowage plans.</p>
+                    <h3>Captain-Inspired AI</h3>
+                    <p>Algorithms trained on real captains' decisions and stability principles deliver trusted stowage plans.</p>
                 </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-database"></i>
-                    </div>
-                    <h3>Historical Data Utilization</h3>
-                    <p>Leverage past stowage data to quickly confirm cargo feasibility and avoid previous mistakes.</p>
-                </div>
-                
+
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-chart-line"></i>
                     </div>
-                    <h3>Optimized Cargo Loading</h3>
-                    <p>Maximize your vessel's capacity with intelligent stowage suggestions that consider all constraints.</p>
+                    <h3>Data-Driven Decisions</h3>
+                    <p>Utilize historical voyage data to confirm cargo feasibility and avoid past errors.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-ship"></i>
+                    </div>
+                    <h3>Capacity Optimization</h3>
+                    <p>Maximize vessel capacity with intelligent stowage suggestions tailored to operational constraints.</p>
                 </div>
             </div>
         </div>
     </section>
-    
-    <section class="how-it-works">
+
+    <section id="how-it-works" class="how-it-works">
         <div class="container">
-            <h2>How ShipIQ.ai Works</h2>
-            <p>Our system transforms the traditional stowage planning process into an intelligent, data-driven operation.</p>
-            
+            <h2>Our Process</h2>
+            <p style="margin: 1rem auto 0;">ShipIQ transforms stowage planning into a smart, data-driven operation that evolves with every voyage.</p>
+
             <div class="steps">
                 <div class="step">
                     <div class="step-number">1</div>
                     <h3>Data Collection</h3>
-                    <p>We collect and analyze past voyage data, stowage records, and port characteristics to build our knowledge base.</p>
+                    <p>Analyze past voyage data, stowage records, and port characteristics to build a robust knowledge base.</p>
                 </div>
-                
+
                 <div class="step">
                     <div class="step-number">2</div>
-                    <h3>Smart Search</h3>
-                    <p>Operators search for similar past cases based on cargo, routes, and restrictions.</p>
+                    <h3>Intelligent Search</h3>
+                    <p>Quickly find similar past cases based on cargo types, routes, and port restrictions.</p>
                 </div>
-                
+
                 <div class="step">
                     <div class="step-number">3</div>
-                    <h3>Intelligent Suggestions</h3>
-                    <p>The system recommends optimal stowage patterns and highlights potential risks.</p>
+                    <h3>Smart Recommendations</h3>
+                    <p>Receive optimal stowage patterns with risk highlights based on historical data.</p>
                 </div>
-                
+
                 <div class="step">
                     <div class="step-number">4</div>
-                    <h3>Automated Communication</h3>
-                    <p>Generate complete stowage plans with automated emails to vessels including all critical information.</p>
+                    <h3>Automated Documentation</h3>
+                    <p>Generate complete stowage plans with automated vessel communications.</p>
                 </div>
-                
+
                 <div class="step">
                     <div class="step-number">5</div>
-                    <h3>Final Adjustment</h3>
-                    <p>Captains review and make final adjustments with full context from historical data.</p>
+                    <h3>Captain Review</h3>
+                    <p>Review and adjust plans with full context from historical data and recommendations.</p>
                 </div>
-                
+
                 <div class="step">
                     <div class="step-number">6</div>
-                    <h3>Continuous Learning</h3>
-                    <p>Actual voyage data feeds back into the system, improving future recommendations.</p>
+                    <h3>Continuous Improvement</h3>
+                    <p>Voyage results enhance the system, improving future recommendations.</p>
                 </div>
             </div>
         </div>
     </section>
-    
+
     <section class="testimonials">
         <div class="container">
-            <h2>Trusted by Maritime Professionals</h2>
-            
+            <h2 style="color: var(--text-light);">Industry Recognition</h2>
+            <p style="color: rgba(255,255,255,0.8); margin: 1rem auto 0;">Trusted by maritime professionals for cutting-edge stowage planning solutions.</p>
+
             <div class="testimonial-grid">
                 <div class="testimonial">
-                    <p>"ShipIQ.ai reduced our stowage planning time by 70%, allowing us to secure more spot cargoes."</p>
+                    <p>"ShipIQ slashed our stowage planning time by 70%, boosting our ability to secure spot cargoes."</p>
                     <p><strong>— Chief Operations Officer</strong><br>Major Tanker Operator</p>
                 </div>
-                
+
                 <div class="testimonial">
-                    <p>"The AI suggestions have helped us optimize our cargo loading beyond what we thought was possible."</p>
+                    <p>"The AI-driven recommendations optimized our cargo loading beyond expectations."</p>
                     <p><strong>— Fleet Captain</strong><br>International Shipping Company</p>
                 </div>
-                
+
                 <div class="testimonial">
-                    <p>"Finally, a system that captures and utilizes all those discarded stowage plans we used to generate."</p>
+                    <p>"ShipIQ captures and leverages stowage plans we used to discard, transforming our process."</p>
                     <p><strong>— Chartering Manager</strong><br>Oil Trading Firm</p>
                 </div>
             </div>
         </div>
     </section>
-    
-    <section id="contact" class="container" style="padding: 4rem 0;">
-        <h2>Ready to Transform Your Stowage Planning?</h2>
-        <p>Contact us to schedule a demo and see how ShipIQ.ai can benefit your operations.</p>
-        
-        <form style="max-width: 600px; margin: 2rem auto;">
-            <div style="margin-bottom: 1rem;">
-                <label for="name" style="display: block; margin-bottom: 0.5rem;">Name</label>
-                <input type="text" id="name" style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
-            </div>
-            
-            <div style="margin-bottom: 1rem;">
-                <label for="email" style="display: block; margin-bottom: 0.5rem;">Email</label>
-                <input type="email" id="email" style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
-            </div>
-            
-            <div style="margin-bottom: 1rem;">
-                <label for="company" style="display: block; margin-bottom: 0.5rem;">Company</label>
-                <input type="text" id="company" style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
-            </div>
-            
-            <div style="margin-bottom: 1rem;">
-                <label for="message" style="display: block; margin-bottom: 0.5rem;">Message</label>
-                <textarea id="message" rows="4" style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;"></textarea>
-            </div>
-            
-            <button type="submit" class="cta-button" style="border: none; cursor: pointer;">Request Demo</button>
-        </form>
+
+    <section id="contact" class="container" style="text-align:center; padding: 5rem 0;">
+        <h2>Ready to Transform Your Operations?</h2>
+        <p style="margin: 1rem auto 2rem;">Contact us to schedule a demo and discover how ShipIQ optimizes stowage planning.</p>
+
+        <div class="contact-form">
+            <form id="contact-form">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="company">Company</label>
+                    <input type="text" id="company" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">How can we help you?</label>
+                    <textarea id="message" required></textarea>
+                </div>
+
+                <button type="submit" class="cta-button" style="width: 100%;">Request Demo</button>
+                <div id="form-message" class="form-message"></div>
+            </form>
+        </div>
     </section>
-    
+
     <footer>
         <div class="container">
-            <p>&copy; 2023 ShipIQ.ai. All rights reserved.</p>
-            <p>From Docks to Data — Intelligent Maritime Logistics</p>
+            <div class="footer-logo">shipIQ</div>
+            <div style="margin-bottom: 1.5rem; font-style: italic;">From dock to data</div>
+            <div style="margin-bottom: 1.5rem;">
+                <a href="#" style="color: var(--secondary); margin: 0 1rem; text-decoration: none;">Privacy Policy</a>
+                <a href="#" style="color: var(--secondary); margin: 0 1rem; text-decoration: none;">Terms of Service</a>
+                <a href="#contact" style="color: var(--secondary); margin: 0 1rem; text-decoration: none;">Contact Us</a>
+            </div>
+            <p>© 2025 ShipIQ.ai. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const formMessage = document.getElementById('form-message');
+            try {
+                // Simulate form submission (no backend integration)
+                formMessage.className = 'form-message success';
+                formMessage.textContent = 'Thank you! Your request has been submitted.';
+                this.reset();
+                setTimeout(() => {
+                    formMessage.style.display = 'none';
+                }, 3000);
+            } catch (error) {
+                formMessage.className = 'form-message error';
+                formMessage.textContent = 'Oops! Something went wrong. Please try again.';
+            }
+        });
+    </script>
 </body>
 </html>
