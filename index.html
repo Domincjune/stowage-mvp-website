@@ -43,8 +43,8 @@
         }
 
         .logo-container {
-            display: flex;
-            align-items: center;
+            display: flow;
+            align-items: left;
         }
 
         .logo {
@@ -60,6 +60,8 @@
             font-style: italic;
             font-size: 1.1rem;
             opacity: 0.9;
+            font-size: 15px;
+            font-weight: 500;
         }
 
         nav a {
@@ -150,6 +152,29 @@
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
             background-color: #F7CF4C;
+        }
+
+        .cta-button-submit {
+            display: inline-block;
+            background-color: var(--primary); 
+            color: var(--light);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 8px 20px rgba(0, 0, 0, 0.15);
+            background-color: var(--light); 
+            color: var(--dark);
+
         }
 
         .features {
@@ -287,10 +312,11 @@
 
         .form-group label {
             display: block;
+            text-align: left;
             margin-bottom: 0.75rem;
             font-family: 'Poppins', sans-serif;
             font-weight: 600;
-            color: var(--primary);
+            color: var(--dark);
         }
 
         .form-group input,
@@ -519,7 +545,7 @@
                     <textarea id="message" required></textarea>
                 </div>
 
-                <button type="submit" class="cta-button" style="width: 100%;">Request Demo</button>
+                <button type="submit" class="cta-button-submit" style="width: 100%;">Request Demo</button>
                 <div id="form-message" class="form-message"></div>
             </form>
         </div>
