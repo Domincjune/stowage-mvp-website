@@ -1,0 +1,23 @@
+{
+  "name": "stowage-mvp-website",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Domincjune/stowage-mvp-website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Domincjune/stowage-mvp-website/issues"
+  },
+  "homepage": "https://github.com/Domincjune/stowage-mvp-website#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}

@@ -31,8 +31,8 @@
         }
 
         .header {
-            background-color: var(--primary);
-            padding: 1.5rem;
+            background-color: var(--light);
+            padding: 15px 24px 5px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -51,21 +51,28 @@
             font-family: 'Poppins', sans-serif;
             font-size: 2rem;
             font-weight: 700;
-            color: var(--secondary);
+            color: var(--dark);
             margin-right: 0.75rem;
         }
 
+        .logo-icon {
+            font-size: 48px;
+            color: var(--primary);
+            margin-bottom: 10px;
+            transition: transform 0.3s ease;
+        }
+
         .tagline {
-            color: var(--text-light);
+            color: var(--primary);
             font-style: italic;
             font-size: 1.1rem;
             opacity: 0.9;
             font-size: 15px;
-            font-weight: 500;
+            font-weight: bold;
         }
 
         nav a {
-            color: var(--text-light);
+            color: var(--dark);
             margin: 0 1.25rem;
             text-decoration: none;
             font-weight: 600;
@@ -73,12 +80,12 @@
         }
 
         nav a:hover {
-            color: var(--secondary);
+            color: var(--primary);
         }
 
         .hero {
-            /* background-image: url("./banner-img.png") repeat 0 0;            */
-            background: linear-gradient(135deg, var(--primary), rgba(12, 33, 161, 0.8));
+            background: url(./images/banner-img.png) 0;           
+            /* background: linear-gradient(135deg, var(--primary), rgba(12, 33, 161, 0.8)); */
             color: var(--text-light);
             padding: 7rem 1.5rem 5rem;
             text-align: center;
@@ -86,7 +93,7 @@
             overflow: hidden;
         }
 
-        .hero::before {
+        /* .hero::before {
             content: '';
             position: absolute;
             top: 0;
@@ -96,7 +103,7 @@
             background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="100" cy="100" r="100" fill="rgba(255,255,255,0.05)"/></svg>') repeat;
             opacity: 0.1;
             z-index: 1;
-        }
+        } */
 
         .container {
             max-width: 1280px;
@@ -110,7 +117,7 @@
             font-family: 'Poppins', sans-serif;
             font-size: 3.5rem;
             margin-bottom: 1.25rem;
-            color: var(--light);
+            color: var(--secondary);
             line-height: 1.2;
         }
 
@@ -251,7 +258,7 @@
         }
 
         .testimonials {
-            background-color: var(--primary);
+            background-color: var(--dark);
             color: var(--text-light);
             padding: 5rem 0;
             position: relative;
@@ -397,17 +404,22 @@
 </head>
 <body>
     <header class="header">
-        <div class="logo-container">
-            <div class="logo">shipIQ</div>
-            <div class="tagline">From dock to data</div>
+        <div style="display:flex;">
+            <div class="logo-icon">
+                <i class="fas fa-ship"></i>
+            </div>
+            <div class="logo-container" style='margin-left: 10px'>
+                <div class="logo">shipIQ</div>
+                <div class="tagline">From dock to data</div>
+            </div>
         </div>
+      
         <nav>
             <a href="#features">Features</a>
             <a href="#how-it-works">How It Works</a>
             <a href="#contact">Contact</a>
         </nav>
     </header>
-
     <section class="hero">
         <div class="container">
             <h1>AI-Powered Stowage Planning</h1>
