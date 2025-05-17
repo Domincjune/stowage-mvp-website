@@ -18,6 +18,7 @@
   "homepage": "https://github.com/Domincjune/stowage-mvp-website#readme",
   "description": "",
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "particles.js": "^2.0.0"
   }
 }

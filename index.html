@@ -6,6 +6,8 @@
     <title>ShipIQ.ai - Intelligent Stowage Planning</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@500;700&display=swap">
+    <!-- Import Particles.js and app.js files -->
+    <script src="./particles.min.js"></script> <!-- stats.js lib --> 
     <style>
         :root {
             --primary: #2463EB; /* Dark blue */
@@ -82,15 +84,34 @@
         nav a:hover {
             color: var(--primary);
         }
-
         .hero {
-            background: url(./images/banner-img.png) 0;           
-            /* background: linear-gradient(135deg, var(--primary), rgba(12, 33, 161, 0.8)); */
+            /* background: url(./images/banner-img.png) 0; */
             color: var(--text-light);
             padding: 7rem 1.5rem 5rem;
             text-align: center;
             position: relative;
             overflow: hidden;
+        }
+
+        #particles-js {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 1;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.3); /* adjust opacity as needed */
+            z-index: 0;
         }
 
         /* .hero::before {
@@ -401,6 +422,9 @@
             }
         }
     </style>
+    <style>
+    /* ---- particles.js container ---- */ #particles-js{ position:absolute; width: 100%; height: 100%; background-color: #000000; background-image: url(""); background-repeat: no-repeat; background-size: cover; background-position: 50% 50%; } /* ---- stats.js ---- */ .count-particles{ background: #000022; position: absolute; top: 48px; left: 0; width: 80px; color: #13E8E9; font-size: .8em; text-align: left; text-indent: 4px; line-height: 14px; padding-bottom: 2px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; } .js-count-particles{ font-size: 1.1em; } #stats, .count-particles{ -webkit-user-select: none; margin-top: 5px; margin-left: 5px; } #stats{ border-radius: 3px 3px 0 0; overflow: hidden; } .count-particles{ border-radius: 0 0 3px 3px; }
+    </style>
 </head>
 <body>
     <header class="header">
@@ -413,7 +437,6 @@
                 <div class="tagline">From dock to data</div>
             </div>
         </div>
-      
         <nav>
             <a href="#features">Features</a>
             <a href="#how-it-works">How It Works</a>
@@ -421,13 +444,14 @@
         </nav>
     </header>
     <section class="hero">
+        <!-- particles.js container -->
+        <div id="particles-js"></div> 
         <div class="container">
             <h1>AI-Powered Stowage Planning</h1>
-            <p style="font-size: 1.25rem; max-width: 800px; margin: 0 auto 2rem;">Revolutionize maritime logistics with intelligent stowage solutions inspired by real captains and stability principles.</p>
+            <p style="font-size: 1.25rem; max-width: 800px; margin: 0 auto 2rem; font-weight: bold;">Revolutionize maritime logistics with intelligent stowage solutions inspired by real captains and stability principles.</p>
             <a href="#contact" class="cta-button">Request a Demo</a>
         </div>
     </section>
-
     <section id="features" class="features">
         <div class="container">
             <h2>Optimize Your Cargo Operations</h2>
@@ -593,5 +617,71 @@
             }
         });
     </script>
-</body>
+    <script>
+        particlesJS('particles-js', {
+  particles: {
+    number: {
+      value: 100,
+      density: { enable: true, value_area: 1000 }
+    },
+    color: {
+      value: "#2463EB"
+    },
+    shape: {
+      type: "edge",
+    },
+    opacity: {
+      value: 0.6,
+      random: false
+    },
+    size: {
+      value: 4,
+      random: true
+    },
+    line_linked: {
+      enable: true,
+      distance: 150,
+      color: "#2463EB",
+      opacity: 0.4,
+      width: 5
+    },
+    move: {
+      enable: true,
+      speed: 0.1,
+      direction: "none",
+      random: false,
+      straight: false,
+      out_mode: "out",
+      bounce: false
+    }
+  },
+  interactivity: {
+    detect_on: "canvas",
+    events: {
+      onhover: {
+        enable: true,
+        mode: "repulse"
+      },
+      onclick: {
+        enable: true,
+        mode: "push"
+      },
+      resize: true
+    },
+    modes: {
+      repulse: {
+        distance: 100,
+        duration: 0.4
+      },
+      push: {
+        particles_nb: 4
+      }
+    }
+  },
+  retina_detect: true
+});
+
+    </script>
+    </body>
+    
 </html>
