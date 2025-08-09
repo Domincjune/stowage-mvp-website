@@ -1,695 +1,1032 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShipIQ.ai - Intelligent Stowage Planning</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@500;700&display=swap">
-    <!-- Import Particles.js and app.js files -->
-    <script src="./particles.min.js"></script> <!-- stats.js lib --> 
-    <style>
-        :root {
-            --primary: #2463EB; /* Dark blue */
-            --secondary: #EDC542; /* Golden yellow */
-            --accent: #EDC542;
-            --light: #F8FAFC;
-            --dark: #141414; /* Dark gray */
-            --text: #141414;
-            --text-light: #F8FAFC;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" href="images/Collapsed-Logo.png" type="image/png">
+  <title>ShipIQ.ai - Intelligent Stowage Planning</title>
+  <!-- Lottie Player -->
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@700&display=swap" rel="stylesheet">
+  <script src="./particles.min.js"></script>
+
+  <style>
+    /* -------------------------
+       Theme variables
+       ------------------------- */
+    :root {
+      --primary: #262262; /* Brand dark blue */
+      --secondary: #4CAF50; /* Softer green */
+      --accent: #FFC107; /* Warm yellow */
+      --light: #ffffff;
+      --off-white: #f8f9fc;
+      --medium-gray: #e9edf2;
+      --dark: #020202;
+      --text: #1a1a1a;
+      --muted: #6b6f76;
+      --text-light: #ecedee;
+    }
+
+    /* -------------------------
+       Reset & base
+       ------------------------- */
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      background-color: var(--light);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x: hidden;
+    }
+
+    h1,h2,h3,h4,h5,h6 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 0 0 0.5rem 0;
+    }
+
+    p { margin: 0 0 1rem 0; color: var(--muted); }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* -------------------------
+       Header
+       ------------------------- */
+    .header {
+      background-color: var(--light);
+      color: var(--primary);
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      border-bottom: 1px solid var(--medium-gray);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 180px;
+    }
+
+    .logo-img {
+      display: block;
+      width: 160px;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .logo-text {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--primary);
+      display: none; /* hide text if using image logo - toggle if needed */
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-left: auto;
+    }
+
+    nav a {
+      color: var(--primary);
+      margin: 0 0.5rem;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 6px 8px;
+      border-radius: 6px;
+      transition: all .18s ease;
+    }
+
+    nav a:hover {
+      color: var(--secondary);
+      background: rgba(76, 175, 80, 0.06);
+    }
+
+    .signInBtn {
+      background: var(--primary);
+      color: var(--light);
+      border: none;
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .18s ease, box-shadow .18s ease;
+      box-shadow: 0 6px 16px rgba(38,34,98,0.12);
+    }
+
+    .signInBtn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(38,34,98,0.12);
+      background: linear-gradient(90deg, var(--primary), #2f2a88);
+    }
+
+    /* -------------------------
+       Hero
+       ------------------------- */
+    .hero {
+      position: relative;
+      padding: 6.5rem 1.5rem 4rem;
+      min-height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--light);
+      background: linear-gradient(180deg, rgba(38,34,98,0.92) 0%, rgba(38,34,98,0.88) 40%, rgba(38,34,98,0.82) 100%);
+      overflow: hidden;
+    }
+
+    /* Particles layer sits below content and must not capture pointer events */
+    #particles-js {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background-color: transparent;
+    }
+
+    .hero .container {
+      position: relative;
+      z-index: 2;
+      pointer-events: auto; /* allow clicks in hero */
+      color: var(--light);
+    }
+
+    .prelogin-h1 {
+      font-size: 3.2rem;
+      line-height: 1.08;
+      margin-bottom: 0.5rem;
+      color: var(--light);
+    }
+
+    .prelogin-p-subheading {
+      font-size: 1.125rem;
+      max-width: 840px;
+      margin: 0 auto 1.5rem;
+      color: rgba(255,255,255,0.92);
+      font-weight: 500;
+    }
+
+    .hero .cta-row { margin-top: 1.5rem; }
+
+    /* CTA buttons */
+    .cta-button {
+      display: inline-block;
+      background-color: var(--secondary);
+      color: var(--dark);
+      padding: 0.9rem 2rem;
+      border-radius: 999px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      margin-right: 0.75rem;
+    }
+
+    .cta-button.secondary {
+      background: transparent;
+      color: var(--light);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .cta-button:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.12); }
+    .cta-button.secondary:hover { background: rgba(255,255,255,0.06); }
+
+    /* -------------------------
+       Features
+       ------------------------- */
+       .features {
+            background-color: var(--off-white);
+            padding: 4.5rem 1.5rem;
         }
 
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 0;
-            color: var(--text);
-            line-height: 1.6;
-            background-color: var(--light);
-        }
-
-        .header {
-            background-color: var(--light);
-            padding: 15px 24px 5px 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .logo-container {
-            display: flow;
-            align-items: left;
-        }
-
-        .logo {
-            font-family: 'Poppins', sans-serif;
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--dark);
-            margin-right: 0.75rem;
-        }
-
-        .logo-icon {
-            font-size: 48px;
-            color: var(--primary);
-            margin-bottom: 10px;
-            transition: transform 0.3s ease;
-        }
-
-        .tagline {
-            color: var(--primary);
-            font-style: italic;
-            font-size: 1.1rem;
-            opacity: 0.9;
-            font-size: 15px;
-            font-weight: bold;
-        }
-
-        nav a {
-            color: var(--dark);
-            margin: 0 1.25rem;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        nav a:hover {
-            color: var(--primary);
-        }
-        .hero {
-            /* background: url(./images/banner-img.png) 0; */
-            color: var(--text-light);
-            padding: 7rem 1.5rem 5rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        #particles-js {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
-
-        #particles-js canvas {
-            filter: drop-shadow(0 0 8px #00f0ff)
-        }
-        #particles-js {
-            background-color: #000000; /* Black for maximum contrast */
-        }
-
-
-        .hero .container {
-            position: relative;
-            z-index: 1;
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.3); /* adjust opacity as needed */
-            z-index: 0;
-        }
-
-        /* .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="100" cy="100" r="100" fill="rgba(255,255,255,0.05)"/></svg>') repeat;
-            opacity: 0.1;
-            z-index: 1;
-        } */
-
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        h1 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 3.5rem;
-            margin-bottom: 1.25rem;
-            color: var(--secondary);
-            line-height: 1.2;
-        }
-
-        h2 {
-            font-family: 'Poppins', sans-serif;
-            color: var(--dark);
-            font-size: 2.25rem;
-            position: relative;
-            display: inline-block;
-            margin-bottom: 1.5rem;
-        }
-
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 80px;
-            height: 5px;
-            background-color: var(--secondary);
-            border-radius: 2px;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background-color: var(--light);
-            color: var(--dark);
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-            background-color: #F7CF4C;
-        }
-
-        .cta-button-submit {
-            display: inline-block;
-            background-color: var(--primary); 
-            color: var(--light);
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-
-        .cta-button-submit:hover {
-            transform: translateY(-3px);
-            background-color: var(--secondary); 
-            color: var(--dark);
-        }
-
-        .features {
-            padding: 5rem 0;
-            background-color: white;
-        }
-
-        .feature-grid {
+        .features .feature-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem; /* more breathing room between cards */
         }
 
-        .feature-card {
+        .features .feature-card {
             background: white;
             border-radius: 12px;
-            padding: 2.5rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-            border-left: 5px solid var(--secondary);
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .feature-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        .features .feature-icon {
+            width: 180px;
+            height: 180px;
+            margin: 50px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .feature-icon {
-            font-size: 3rem;
+        .features .feature-icon lottie-player {
+            width: 100%;
+            height: 100%;
+            transform: scale(1.5); /* enlarge regardless of JSON size */
+            transform-origin: center center;
+        }
+
+        #smart-tank-utilisation{
+            transform: scale(1.0);
+        }
+
+        .features .feature-content h3 {
+            margin: 0 0 0.5rem 0;
             color: var(--primary);
-            margin-bottom: 1.5rem;
-            transition: transform 0.3s ease;
+            font-size: 1.2rem;
         }
 
-        .feature-card:hover .feature-icon {
-            transform: scale(1.1);
+        .features .feature-content p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.4;
         }
 
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            .features .feature-icon {
+                width: 100px;
+                height: 100px;
+            }
+        }
+
+        /* -------------------------
+        How it works / steps
+        ------------------------- */
         .how-it-works {
-            padding: 5rem 0;
-            background-color: var(--light);
+            padding: 4.5rem 1.5rem;
+            background: var(--light);
         }
 
         .steps {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            margin-top: 3rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.25rem;
+            margin-top: 1.5rem;
         }
 
         .step {
-            flex: 0 0 calc(33.333% - 2rem);
-            margin-bottom: 2.5rem;
+            background: var(--off-white);
+            padding: 1.25rem 1rem 1rem 1.25rem;
+            border-radius: 10px;
             position: relative;
-            padding-left: 70px;
+            min-height: 110px;
         }
 
         .step-number {
             background-color: var(--primary);
             color: var(--light);
-            width: 50px;
-            height: 50px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Poppins', sans-serif;
             font-weight: 700;
-            font-size: 1.5rem;
+            font-size: 1rem;
+            position: absolute;
+            left: -18px;
+            top: 16px;
+            box-shadow: 0 6px 18px rgba(38,34,98,0.08);
+        }
+
+        .how-it-works .steps {
+            display: flex;
+            justify-content: space-between; /* Keep steps in a row */
+            gap: 2rem;
+            flex-wrap: wrap; /* Allow wrapping on small screens */
+        }
+
+        .how-it-works .step {
+            flex: 1 1 30%; /* Equal width for each step */
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            position: relative;
+            padding-left: 50px; /* Space for the number */
+        }
+
+        .how-it-works .step-number {
             position: absolute;
             left: 0;
             top: 0;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
         }
 
+        .how-it-works .step h4 {
+            margin: 0 0 0.25rem;
+        }
+
+        .how-it-works .step p {
+            margin: 0;
+        }
+
+        /* -------------------------
+        Testimonials
+        ------------------------- */
         .testimonials {
-            background-color: var(--dark);
-            color: var(--text-light);
-            padding: 5rem 0;
-            position: relative;
-        }
-
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .testimonial {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2.5rem;
-            border-radius: 12px;
-            border-left: 5px solid var(--secondary);
-            transition: transform 0.3s ease;
-        }
-
-        .testimonial:hover {
-            transform: translateY(-5px);
-        }
-
-        .testimonial strong {
-            color: var(--secondary);
-            font-family: 'Poppins', sans-serif;
-        }
-
-        footer {
-            background-color: var(--dark);
-            color: var(--text-light);
-            padding: 4rem 0;
-            text-align: center;
-        }
-
-        .footer-logo {
-            font-family: 'Poppins', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--secondary);
-            margin-bottom: 1.5rem;
-        }
-
-        .contact-form {
-            max-width: 700px;
-            margin: 3rem auto;
-            background: white;
-            padding: 3rem;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .form-group {
-            margin-bottom: 1.75rem;
-        }
-
-        .form-group label {
-            display: block;
-            text-align: left;
-            margin-bottom: 0.75rem;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
+            padding: 4.5rem 1.5rem;
+            background: linear-gradient(180deg, rgba(245,246,248,1), rgba(240,243,245,1));
             color: var(--dark);
         }
 
-        .form-group input,
-        .form-group textarea {
+        .testimonial-grid { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin-top: 1.5rem; }
+
+        .testimonial {
+            background: var(--light);
+            padding: 1.25rem;
+            border-radius: 10px;
+            box-shadow: 0 8px 18px rgba(18,22,28,0.04);
+            border-left: 4px solid rgba(76,175,80,0.14);
+        }
+
+        .testimonial strong { color: var(--primary); }
+
+        /* -------------------------
+        Contact & Footer
+        ------------------------- */
+        .contact-section {
+            padding: 4.5rem 1.5rem;
+            background: var(--light);
+        }
+
+        #contact-section .container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center; /* middle align text with form */
+            justify-content: center;
+            gap: 3rem;
+        }
+
+        /* Left intro section */
+        .contact-intro {
+            flex: 1 1 400px;
+            max-width: 500px;
+        }
+
+        .contact-description {
+            color: var(--muted, #555);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        /* Right form section */
+        .contact-form {
+            flex: 1 1 420px;
+        }
+
+        /* Form styling */
+        #contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        #contact-form label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--muted, #555);
+        }
+
+        #contact-form input,
+        #contact-form textarea {
             width: 100%;
-            padding: 1rem;
-            border: 1px solid #E2E8F0;
+            padding: 0.75rem 1rem;
+            border: 1px solid #ddd;
             border-radius: 8px;
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
+            font-size: 0.95rem;
+            background: #fafafa;
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
 
-        .form-group input:focus,
-        .form-group textarea:focus {
-            border-color: var(--secondary);
-            outline: none;
+        #contact-form input:focus,
+        #contact-form textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(126, 87, 194, 0.15);
+            background: #fff;
         }
 
-        .form-group textarea {
-            min-height: 150px;
+        #contact-form textarea {
+            min-height: 100px;
             resize: vertical;
         }
 
-        .form-message {
-            display: none;
-            margin-top: 1rem;
-            padding: 1rem;
+        #contact-form button {
+            background: linear-gradient(135deg, #7e57c2, #5e35b1);
+            color: white;
+            padding: 0.85rem;
+            border: none;
             border-radius: 8px;
+            font-size: 1rem;
             font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s;
         }
 
-        .form-message.success {
-            display: block;
-            background-color: #D4F4DD;
-            color: #1A7F37;
+        #contact-form button:hover {
+            background: linear-gradient(135deg, #6a4bc3, #4a2e9e);
+            transform: translateY(-2px);
         }
 
-        .form-message.error {
-            display: block;
-            background-color: #FEE2E2;
-            color: #B91C1C;
+        .form-group {
+            margin-bottom: 1.2rem;
         }
 
-        @media (max-width: 768px) {
-            .step {
-                flex: 0 0 100%;
-            }
-
-            h1 {
-                font-size: 2.5rem;
-            }
-
-            .header {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .logo-container {
-                margin-bottom: 1.5rem;
-            }
-
-            nav a {
-                margin: 0.5rem 1rem;
-            }
+        /* Modal styles */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 2000; 
+            left: 0; top: 0;
+            width: 100%; height: 100%; 
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6);
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: auto;
+            padding: 2rem;
+            border-radius: 12px;
+            width: 90%;
+            position: relative;
+        }
+        .close-btn {
+            position: absolute;
+            right: 16px;
+            top: 16px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-btn:hover {
+            color: var(--secondary);
         }
 
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 2rem;
-            }
-
-            .cta-button {
-                padding: 0.75rem 1.5rem;
-                font-size: 1rem;
-            }
+        #contactModal {
+            position: fixed; /* stays in the same place when scrolling */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* perfectly center horizontally and vertically */
+            background: white;
+            width: 500px; /* you can adjust */
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            padding:20px 0;
         }
-    </style>
-    <style>
-    /* ---- particles.js container ---- */ #particles-js{ position:absolute; width: 100%; height: 100%; background-color: #000000; background-image: url(""); background-repeat: no-repeat; background-size: cover; background-position: 50% 50%; } /* ---- stats.js ---- */ .count-particles{ background: #000022; position: absolute; top: 48px; left: 0; width: 80px; color: #13E8E9; font-size: .8em; text-align: left; text-indent: 4px; line-height: 14px; padding-bottom: 2px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; } .js-count-particles{ font-size: 1.1em; } #stats, .count-particles{ -webkit-user-select: none; margin-top: 5px; margin-left: 5px; } #stats{ border-radius: 3px 3px 0 0; overflow: hidden; } .count-particles{ border-radius: 0 0 3px 3px; }
-    </style>
+        #contactModal .modal-content {
+            padding: 0;
+        }
+
+        .form-message { display: none; margin-top: 0.75rem; border-radius: 8px; padding: 0.75rem 1rem; font-weight: 600; }
+        .form-message.success { display: block; background: #D4F4DD; color: #1A7F37; }
+        .form-message.error { display: block; background: #FEE2E2; color: #B91C1C; }
+
+        footer {
+            background-color: var(--primary);
+            color: var(--text-light);
+            padding: 2.5rem 1rem;
+            text-align: center;
+        }
+
+        .footer-logo { width: 140px; display:block; margin: 0 auto 12px; }
+        .footer-policies { margin: 0.5rem 0 0; }
+        .footer-policies a { color: rgba(255,255,255,0.85); margin: 0 0.5rem; display:inline-block; }
+        .footer-policies a:hover { color: var(--secondary); }
+    
+        /* -------------------------
+        Scroll to top
+        ------------------------- */
+
+        #scrollTopBtn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            cursor: pointer;
+            z-index: 9999;
+            border-radius: 50%;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(6px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        #scrollTopBtn:hover {
+            background: rgba(255, 255, 255, 1);
+        }  
+
+        /* -------------------------
+        Responsive tweaks
+        ------------------------- */
+        @media (max-width: 900px) {
+        .logo-img { width: 120px; }
+        .hero { padding: 4.5rem 1rem 3rem; }
+        .prelogin-h1 { font-size: 2rem; }
+        nav { gap: 0.5rem; }
+        .features .feature-card { flex-direction: row; }
+        }
+
+        @media (max-width: 560px) {
+        .logo-img { width: 100px; }
+        .logo-container { min-width: 120px; }
+        nav a { display: none; } /* simplified mobile nav - you can swap for a mobile menu */
+        .signInBtn { display: none; }
+        .features .feature-card { flex-direction: column; text-align: center; align-items: center; }
+        .features .feature-grid { text-align: center; }
+        }
+
+        /* ---- particles/stats misc ---- */
+        .count-particles { display:none; } /* hide by default; optional debug */
+        #stats { display:none; }
+
+  </style>
 </head>
 <body>
-    <header class="header">
-        <div style="display:flex;">
-            <div class="logo-icon">
-                <i class="fas fa-ship"></i>
-            </div>
-            <div class="logo-container" style='margin-left: 10px'>
-                <div class="logo">shipIQ</div>
-                <div class="tagline">From dock to data</div>
-            </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="logo-container">
+      <img class="logo-img" src="images/Logo-1-dark.png" alt="ShipIQ logo" />
+      <div class="logo-text">ShipIQ.ai</div>
+    </div>
+
+    <nav>
+      <a href="#features-section">Features</a>
+      <a href="#how-it-works-section">How It Works</a>
+      <a href="#contact-section">Contact</a>
+      <button id="signInBtn" class="signInBtn" type="button">Sign in</button>
+    </nav>
+  </header>
+
+ <!-- Hero -->
+ <section class="hero" aria-label="Hero">
+    <div id="particles-js" aria-hidden="true"></div>
+    <div class="container">
+      <h1 class="prelogin-h1">AI-Powered Stowage Planning</h1>
+      <p class="prelogin-p-subheading">Revolutionize maritime logistics with intelligent stowage solutions inspired by real captains and stability principles.</p>
+      <div class="cta-row">
+        <a class="cta-button" href="#contact-section">Request a demo</a>
+        <a class="cta-button secondary" href="#features-section">Explore features</a>
+      </div>
+    </div>
+  </section>
+
+ <!-- Features -->
+ <section id="features-section" class="features">
+    <div class="container">
+      <h2 class="prelogin-h2">Optimize Your Cargo Operations</h2>
+      <p style="color:var(--muted); margin-bottom: 1.25rem;">
+        Empower captains to focus on trade with time-saving, AI-driven stowage planning for seamless cargo operations.
+      </p>
+  
+      <div class="feature-grid">
+        <article class="feature-card" aria-labelledby="f1">
+          <div class="feature-icon" aria-hidden="true" id="smart-tank-utilisation">
+            <lottie-player src="animation/dollarProfit1.json" background="transparent" speed="0.5" loop autoplay></lottie-player>
+          </div>
+          <div class="feature-content">
+            <h3 id="f1">Smart Tank Utilisation</h3>
+            <p>AI-driven algorithms incorporate tank stability principles and cargo characteristics to optimize space usage — unlocking potential value with every voyage.</p>
+          </div>
+        </article>
+  
+        <article class="feature-card" aria-labelledby="f2">
+          <div class="feature-icon" aria-hidden="true">
+            <lottie-player src="animation/ship-ready.json" background="transparent" speed="1" loop autoplay></lottie-player>
+          </div>
+          <div class="feature-content">
+            <h3 id="f2">Ship-Ready Output</h3>
+            <p>Export stowage plans in structured, vessel-friendly formats — enabling faster ship–shore communication and helping operators respond quicker to market opportunities.</p>
+          </div>
+        </article>
+  
+        <article class="feature-card" aria-labelledby="f3">
+          <div class="feature-icon" aria-hidden="true">
+            <lottie-player src="animation/AIBasedIntelligence.json" background="transparent" speed="1" loop autoplay></lottie-player>
+          </div>
+          <div class="feature-content">
+            <h3 id="f3">Data-Backed Planning</h3>
+            <p>Learns from historical voyages to validate feasibility and proactively suggest better planning decisions — minimizing trial-and-error, maximizing efficiency.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+  
+
+<!-- How it works -->
+<section id="how-it-works-section" class="how-it-works">
+    <div class="container">
+      <h2 class="prelogin-h2">Our Process</h2>
+      <p style="color:var(--muted); margin-bottom: 1rem;">ShipIQ transforms stowage planning into a smart, data-driven operation that evolves with every voyage.</p>
+
+      <div class="steps" role="list">
+        <div class="step" role="listitem">
+          <div class="step-number">1</div>
+          <h4>Data Collection</h4>
+          <p>Analyze past voyage data, stowage records, and port characteristics to build a robust knowledge base.</p>
         </div>
-        <nav>
-            <a href="#features">Features</a>
-            <a href="#how-it-works">How It Works</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </header>
-    <section class="hero">
-        <!-- particles.js container -->
-        <div id="particles-js"></div> 
-        <div class="container">
-            <h1>AI-Powered Stowage Planning</h1>
-            <p style="font-size: 1.25rem; max-width: 800px; margin: 0 auto 2rem; font-weight: bold;">Revolutionize maritime logistics with intelligent stowage solutions inspired by real captains and stability principles.</p>
-            <a href="#contact" class="cta-button">Request a Demo</a>
+
+        <div class="step" role="listitem">
+          <div class="step-number">2</div>
+          <h4>Intelligent Search</h4>
+          <p>Quickly find similar past cases based on cargo types, routes, and port restrictions.</p>
         </div>
-    </section>
-    <section id="features" class="features">
-        <div class="container">
-            <h2>Optimize Your Cargo Operations</h2>
-            <p style="margin: 1rem auto 0;">Empower captains to focus on trade with time-saving, AI-driven stowage planning for seamless cargo operations.</p>
 
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-brain"></i>
-                    </div>
-                    <h3>Captain-Inspired AI</h3>
-                    <p>Algorithms trained on real captains' decisions and stability principles deliver trusted stowage plans.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>Data-Driven Decisions</h3>
-                    <p>Utilize historical voyage data to confirm cargo feasibility and avoid past errors.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-ship"></i>
-                    </div>
-                    <h3>Capacity Optimization</h3>
-                    <p>Maximize vessel capacity with intelligent stowage suggestions tailored to operational constraints.</p>
-                </div>
-            </div>
+        <div class="step" role="listitem">
+          <div class="step-number">3</div>
+          <h4>Smart Recommendations</h4>
+          <p>Receive optimal stowage patterns with risk highlights based on historical data.</p>
         </div>
-    </section>
 
-    <section id="how-it-works" class="how-it-works">
-        <div class="container">
-            <h2>Our Process</h2>
-            <p style="margin: 1rem auto 0;">ShipIQ transforms stowage planning into a smart, data-driven operation that evolves with every voyage.</p>
-
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Data Collection</h3>
-                    <p>Analyze past voyage data, stowage records, and port characteristics to build a robust knowledge base.</p>
-                </div>
-
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>Intelligent Search</h3>
-                    <p>Quickly find similar past cases based on cargo types, routes, and port restrictions.</p>
-                </div>
-
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>Smart Recommendations</h3>
-                    <p>Receive optimal stowage patterns with risk highlights based on historical data.</p>
-                </div>
-
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <h3>Automated Documentation</h3>
-                    <p>Generate complete stowage plans with automated vessel communications.</p>
-                </div>
-
-                <div class="step">
-                    <div class="step-number">5</div>
-                    <h3>Captain Review</h3>
-                    <p>Review and adjust plans with full context from historical data and recommendations.</p>
-                </div>
-
-                <div class="step">
-                    <div class="step-number">6</div>
-                    <h3>Continuous Improvement</h3>
-                    <p>Voyage results enhance the system, improving future recommendations.</p>
-                </div>
-            </div>
+        <div class="step" role="listitem">
+          <div class="step-number">4</div>
+          <h4>Automated Documentation</h4>
+          <p>Generate complete stowage plans with automated vessel communications.</p>
         </div>
-    </section>
 
-    <section class="testimonials">
-        <div class="container">
-            <h2 style="color: var(--text-light);">Industry Recognition</h2>
-            <p style="color: rgba(255,255,255,0.8); margin: 1rem auto 0;">Trusted by maritime professionals for cutting-edge stowage planning solutions.</p>
-
-            <div class="testimonial-grid">
-                <div class="testimonial">
-                    <p>"ShipIQ slashed our stowage planning time by 70%, boosting our ability to secure spot cargoes."</p>
-                    <p><strong>— Chief Operations Officer</strong><br>Major Tanker Operator</p>
-                </div>
-
-                <div class="testimonial">
-                    <p>"The AI-driven recommendations optimized our cargo loading beyond expectations."</p>
-                    <p><strong>— Fleet Captain</strong><br>International Shipping Company</p>
-                </div>
-
-                <div class="testimonial">
-                    <p>"ShipIQ captures and leverages stowage plans we used to discard, transforming our process."</p>
-                    <p><strong>— Chartering Manager</strong><br>Oil Trading Firm</p>
-                </div>
-            </div>
+        <div class="step" role="listitem">
+          <div class="step-number">5</div>
+          <h4>Captain Review</h4>
+          <p>Review and adjust plans with full context from historical data and recommendations.</p>
         </div>
-    </section>
 
-    <section id="contact" class="container" style="text-align:center; padding: 5rem 0;">
-        <h2>Ready to Transform Your Operations?</h2>
-        <p style="margin: 1rem auto 2rem;">Contact us to schedule a demo and discover how ShipIQ optimizes stowage planning.</p>
-
-        <div class="contact-form">
-            <form id="contact-form">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="company">Company</label>
-                    <input type="text" id="company" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="message">How can we help you?</label>
-                    <textarea id="message" required></textarea>
-                </div>
-
-                <button type="submit" class="cta-button-submit" style="width: 100%;">Request Demo</button>
-                <div id="form-message" class="form-message"></div>
-            </form>
+        <div class="step" role="listitem">
+          <div class="step-number">6</div>
+          <h4>Continuous Improvement</h4>
+          <p>Voyage results enhance the system, improving future recommendations.</p>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <footer>
-        <div class="container">
-            <div class="footer-logo">shipIQ</div>
-            <div style="margin-bottom: 1.5rem; font-style: italic;">From dock to data</div>
-            <div style="margin-bottom: 1.5rem;">
-                <a href="#" style="color: var(--secondary); margin: 0 1rem; text-decoration: none;">Privacy Policy</a>
-                <a href="#" style="color: var(--secondary); margin: 0 1rem; text-decoration: none;">Terms of Service</a>
-                <a href="#contact" style="color: var(--secondary); margin: 0 1rem; text-decoration: none;">Contact Us</a>
-            </div>
-            <p>© 2025 ShipIQ.ai. All rights reserved.</p>
+
+<!-- Testimonials -->
+<section class="testimonials" aria-label="Testimonials" style="background: linear-gradient(to bottom, #f7faff, #ffffff); padding: 4rem 0;">
+    <div class="container" style="max-width: 1100px; margin: auto; text-align: center;">
+      <h2 class="prelogin-h2" style="margin-bottom: 0.5rem;">Industry Recognition</h2>
+      <p style="color: var(--muted); margin-bottom: 2rem; font-size: 1.1rem;">
+        Trusted by maritime professionals for cutting-edge stowage planning solutions.
+      </p>
+  
+      <div class="testimonial-grid" style="display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+        <div class="testimonial" style="background: #fff; padding: 1.8rem; border-radius: 12px; box-shadow: 0 6px 18px rgba(0,0,0,0.06); text-align: left; position: relative;">
+          <span style="font-size: 2rem; color: #006699;">❝</span>
+          <p style="margin: 0.5rem 0 1rem; font-style: italic; color: #333;">ShipIQ slashed our stowage planning time by 70%, boosting our ability to secure spot cargoes.</p>
+          <p style="margin: 0; font-weight: bold; color: #004466;">— Chief Operations Officer</p>
+          <p style="margin: 0; font-size: 0.9rem; color: var(--muted);">Major Tanker Operator</p>
         </div>
-    </footer>
+  
+        <div class="testimonial" style="background: #fff; padding: 1.8rem; border-radius: 12px; box-shadow: 0 6px 18px rgba(0,0,0,0.06); text-align: left; position: relative;">
+          <span style="font-size: 2rem; color: #006699;">❝</span>
+          <p style="margin: 0.5rem 0 1rem; font-style: italic; color: #333;">The AI-driven recommendations optimized our cargo loading beyond expectations.</p>
+          <p style="margin: 0; font-weight: bold; color: #004466;">— Fleet Captain</p>
+          <p style="margin: 0; font-size: 0.9rem; color: var(--muted);">International Shipping Company</p>
+        </div>
+  
+        <div class="testimonial" style="background: #fff; padding: 1.8rem; border-radius: 12px; box-shadow: 0 6px 18px rgba(0,0,0,0.06); text-align: left; position: relative;">
+          <span style="font-size: 2rem; color: #006699;">❝</span>
+          <p style="margin: 0.5rem 0 1rem; font-style: italic; color: #333;">ShipIQ captures and leverages stowage plans we used to discard, transforming our process.</p>
+          <p style="margin: 0; font-weight: bold; color: #004466;">— Chartering Manager</p>
+          <p style="margin: 0; font-size: 0.9rem; color: var(--muted);">Oil Trading Firm</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <script>
-        document.getElementById('contact-form').addEventListener('submit', function (e) {
-            e.preventDefault();
-            const formMessage = document.getElementById('form-message');
-            try {
-                // Simulate form submission (no backend integration)
-                formMessage.className = 'form-message success';
-                formMessage.textContent = 'Thank you! Your request has been submitted.';
-                this.reset();
-                setTimeout(() => {
-                    formMessage.style.display = 'none';
-                }, 3000);
-            } catch (error) {
-                formMessage.className = 'form-message error';
-                formMessage.textContent = 'Oops! Something went wrong. Please try again.';
-            }
-        });
-    </script>
-    <script>
-        particlesJS('particles-js', {
+ <!-- Contact Modal -->
+<div id="contactModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <h2 class="prelogin-h2">Ready to Transform Your Operations?</h2>
+      <p class="contact-description">
+        Contact us to schedule a demo and discover how ShipIQ optimizes stowage planning.
+      </p>
+      <div id="form-message" class="form-message" role="status" aria-live="polite"></div>
+      <form id="contact-form" novalidate>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" required />
+        </div>
+  
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required />
+        </div>
+  
+        <div class="form-group">
+          <label for="company">Company</label>
+          <input id="company" name="company" type="text" required />
+        </div>
+  
+        <div class="form-group">
+          <label for="message">How can we help you?</label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+  
+        <button type="submit" class="cta-button cta-button-submit">Request Demo</button>
+      </form>
+    </div>
+  </div>
+
+
+  <div id="scrollTopBtn" style="display:none;">
+    <lottie-player 
+      src="animation/Arrow Down Purple.json"  
+      background="transparent"  
+      speed="1"  
+      style="width: 60px; height: 60px;transform: rotate(180deg);"  
+      loop  
+      autoplay>
+    </lottie-player>
+  </div>
+
+  <footer class="site-footer">
+  
+    <!-- Footer content -->
+    <div class="footer-content container">
+  
+      <img class="footer-logo" src="images/Logo-2-white.png" alt="ShipIQ logo" />
+  
+      <div class="footer-policies">
+        <a href="#" onclick="openModal('privacyModal')">Privacy Policy</a> |
+        <a href="#" onclick="openModal('termsModal')">Terms of Service</a> |
+        <a href="#contact-section">Contact Us</a>
+      </div>
+  
+      <p>© 2025 ShipIQ.ai. All rights reserved.</p>
+      <p class="footer-address">
+        📍 160 Robinson Road, #14-04, Singapore Business Federation Center, Singapore (068914)
+      </p>
+    </div>
+  </footer>
+  
+  
+ <!-- Privacy Policy Modal -->
+<div id="privacyModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('privacyModal')">&times;</span>
+      <h2>Privacy Policy</h2>
+      <div class="modal-body scrollable-content">
+        <p><strong>Last Updated:</strong> August 9, 2025</p>
+  
+        <p>ShipIQ.ai ("we", "our", "us") respects your privacy and is committed to protecting your personal and business data. This Privacy Policy explains how we collect, use, and safeguard information when you use our B2B SaaS platform for optimizing cargo operations.</p>
+  
+        <h3>1. Information We Collect</h3>
+        <ul>
+          <li>Account Information: Name, company name, job title, email address, contact number.</li>
+          <li>Operational Data: Cargo details, vessel schedules, stowage plan information, and optimization parameters provided by you or generated by our AI models.</li>
+          <li>Usage Data: Login activity, feature usage, device/browser type, IP address, and cookies.</li>
+          <li>Support & Communication Records: Any inquiries, feedback, or support requests you send us.</li>
+        </ul>
+  
+        <h3>2. How We Use Your Information</h3>
+        <ul>
+          <li>Provide and improve our AI-driven stowage optimization services.</li>
+          <li>Customize your experience on our platform.</li>
+          <li>Communicate important updates, product enhancements, or maintenance notices.</li>
+          <li>Ensure system security, detect fraud, and comply with applicable laws.</li>
+          <li>Generate anonymized analytics for performance benchmarking.</li>
+        </ul>
+  
+        <h3>3. Data Sharing & Disclosure</h3>
+        <p>We do <strong>not</strong> sell your data. We may share data only with service providers, for legal compliance, or in business transactions such as mergers or acquisitions.</p>
+  
+        <h3>4. Data Security</h3>
+        <p>We use enterprise-grade encryption, secure servers, and role-based access control to protect your data.</p>
+  
+        <h3>5. Data Retention</h3>
+        <p>We retain operational data only as long as necessary for service delivery or as required by law.</p>
+  
+        <h3>6. International Data Transfers</h3>
+        <p>We ensure compliance with Singapore PDPA and EU GDPR for cross-border data transfers.</p>
+  
+        <h3>7. Your Rights</h3>
+        <p>You may request access, correction, or deletion of your personal data, opt-out of marketing, or restrict processing where applicable.</p>
+  
+        <h3>8. Cookies & Tracking</h3>
+        <p>We use cookies for authentication, analytics, and improving user experience.</p>
+  
+        <h3>9. Contact Us</h3>
+        <p><strong>ShipIQ.ai</strong><br>
+        160 Robinson Road, #14-04, Singapore Business Federation Center, Singapore (068914)<br>
+        Email: support@shipiq.ai</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Terms of Service Modal -->
+  <div id="termsModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('termsModal')">&times;</span>
+      <h2>Terms of Service</h2>
+      <div class="modal-body scrollable-content">
+        <p><strong>Last Updated:</strong> August 9, 2025</p>
+  
+        <h3>1. Definitions</h3>
+        <p>"Platform" refers to ShipIQ.ai’s SaaS solution. "Client" refers to the company or user accessing our services.</p>
+  
+        <h3>2. Use of Services</h3>
+        <p>You must have a valid account, provide accurate data, safeguard your credentials, and not use the service for unlawful purposes.</p>
+  
+        <h3>3. Intellectual Property</h3>
+        <p>All software, algorithms, and AI models are owned by ShipIQ.ai. Clients retain ownership of their data but grant us a license to process it.</p>
+  
+        <h3>4. Service Availability</h3>
+        <p>We strive for 99.9% uptime but are not liable for losses from downtime.</p>
+  
+        <h3>5. Fees & Payment</h3>
+        <p>All fees must be paid as per your agreement. Non-payment may result in suspension.</p>
+  
+        <h3>6. Data Accuracy & Liability</h3>
+        <p>Our AI plans are based on provided data; ShipIQ.ai is not liable for losses from recommendations.</p>
+  
+        <h3>7. Confidentiality</h3>
+        <p>We keep your cargo and operational data confidential, unless required by law to disclose.</p>
+  
+        <h3>8. Termination</h3>
+        <p>We may terminate your account for violations, non-payment, or misuse.</p>
+  
+        <h3>9. Governing Law</h3>
+        <p>These terms are governed by Singapore law.</p>
+  
+        <h3>10. Changes to Terms</h3>
+        <p>We may update these terms at any time. Continued use constitutes acceptance.</p>
+      </div>
+    </div>
+  </div>
+  
+
+<script>
+
+function openModal(id) {
+  document.getElementById(id).style.display = 'flex';
+}
+function closeModal(id) {
+  document.getElementById(id).style.display = 'none';
+}
+
+function handleSignIn(){
+  alert("Sign in clicked!");
+}
+
+document.getElementById('contact-form').addEventListener('submit', function (e) {
+  e.preventDefault();
+  const formMessage = document.getElementById('form-message');
+  
+  const data = {
+    name: document.querySelector('[name="name"]').value,
+    email: document.querySelector('[name="email"]').value,
+    company: document.querySelector('[name="company"]').value,
+    message: document.querySelector('[name="message"]').value
+  };
+
+  fetch("https://script.google.com/macros/s/AKfycbzgoR0QGDWxe0Ljfb1TGm8wrOWND7RoHi0RTSYwPdgP9vg2qpMq1POQil9LoEc0QX4O9w/exec", {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: { "Content-Type": "application/json" }
+  })
+  .then(async res => {
+    if (!res.ok) throw new Error(await res.text());
+    return res.json();
+    })
+  .then(() => {
+    formMessage.className = 'form-message success';
+    formMessage.textContent = 'Thank you! Your request has been submitted.';
+    formMessage.style.display = 'block';
+    this.reset();
+    setTimeout(() => formMessage.style.display = 'none', 3000);
+  })
+  .catch(() => {
+    formMessage.className = 'form-message error';
+    formMessage.textContent = 'Oops! Something went wrong. Please try again.';
+    formMessage.style.display = 'block';
+  });
+});
+
+
+
+</script>
+
+<script>
+  window.particlesJS('particles-js', {
   particles: {
-    number: {
-      value: 100,
-      density: { enable: true, value_area: 1000 }
+    number: { value: 150, density: { enable: true, value_area: 1000 } },
+    color: { value: ["#3B82F6", "#60A5FA", "#93C5FD"] }, // Elegant blue gradients
+    shape: { type: "circle" }, // Softer look than "edge"
+    opacity: { value: 0.5, random: false },
+    size: { value: 3, random: true },
+    line_linked: { 
+      enable: true, 
+      distance: 180, 
+      color: "#60A5FA", 
+      opacity: 0.3, 
+      width: 1 
     },
-    color: {
-     value: ["#2463EB"]
-    },
-    shape: {
-      type: "edge",
-    },
-    opacity: {
-      value: 0.6,
-      random: false
-    },
-    size: {
-      value: 4,
-      random: true
-    },
-    line_linked: {
-      enable: true,
-      distance: 200,
-      color: "#2463EB",
-      opacity: 0.4,
-      width: 1
-    },
-    move: {
-      enable: true,
-      speed: 0.3,
-      direction: "none",
-      random: false,
-      straight: false,
-      out_mode: "out",
-      bounce: false
+    move: { 
+      enable: true, 
+      speed: 0.6, 
+      direction: "none", 
+      random: false, 
+      straight: false, 
+      out_mode: "out", 
+      bounce: false 
     }
   },
   interactivity: {
     detect_on: "canvas",
     events: {
-      onhover: {
-        enable: true,
-        mode: "repulse"
-      },
-      onclick: {
-        enable: true,
-        mode: "push"
-      },
+      onhover: { enable: true, mode: "repulse" },
+      onclick: { enable: true, mode: "push" },
       resize: true
     },
     modes: {
-      repulse: {
-        distance: 100,
-        duration: 0.4
-      },
-      push: {
-        particles_nb: 4
-      }
+      repulse: { distance: 100, duration: 0.4 },
+      push: { particles_nb: 4 }
     }
   },
   retina_detect: true
 });
+// Open modal on click
+document.querySelectorAll('a[href="#contact-section"], .cta-button[href="#contact-section"]').forEach(btn => {
+  btn.addEventListener('click', e => {
+    e.preventDefault();
+    document.getElementById('contactModal').style.display = 'block';
+  });
+});
 
-    </script>
-    </body>
-    
+// Close modal
+document.querySelector('.close-btn').onclick = () => {
+  document.getElementById('contactModal').style.display = 'none';
+};
+
+// Close when clicking outside content
+window.onclick = function(e) {
+  if (e.target.id === 'contactModal') {
+    document.getElementById('contactModal').style.display = 'none';
+  }
+};
+
+    // Scroll-to-top button logic
+    const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+    window.addEventListener("scroll", () => {
+    if (window.scrollY > 200) {
+        scrollTopBtn.style.display = "block";
+    } else {
+        scrollTopBtn.style.display = "none";
+    }
+    });
+
+    scrollTopBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+</script>
+
+</body>
 </html>
