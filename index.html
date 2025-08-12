@@ -386,91 +386,6 @@
         /* -------------------------
         Contact & Footer
         ------------------------- */
-        .contact-section {
-            padding: 4.5rem 1.5rem;
-            background: var(--light);
-        }
-
-        #contact-section .container {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center; /* middle align text with form */
-            justify-content: center;
-            gap: 3rem;
-        }
-
-        /* Left intro section */
-        .contact-intro {
-            flex: 1 1 400px;
-            max-width: 500px;
-        }
-
-        .contact-description {
-            color: var(--muted, #555);
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        /* Right form section */
-        .contact-form {
-            flex: 1 1 420px;
-        }
-
-        /* Form styling */
-        #contact-form {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-        }
-
-        #contact-form label {
-            display: block;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-            color: var(--muted, #555);
-        }
-
-        #contact-form input,
-        #contact-form textarea {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            background: #fafafa;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-
-        #contact-form input:focus,
-        #contact-form textarea:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(126, 87, 194, 0.15);
-            background: #fff;
-        }
-
-        #contact-form textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-
-        #contact-form button {
-            background: linear-gradient(135deg, #7e57c2, #5e35b1);
-            color: white;
-            padding: 0.85rem;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            width: 100%;
-            cursor: pointer;
-            transition: background 0.3s ease, transform 0.2s;
-        }
-
-        #contact-form button:hover {
-            background: linear-gradient(135deg, #6a4bc3, #4a2e9e);
-            transform: translateY(-2px);
-        }
 
         .form-group {
             margin-bottom: 1.2rem;
@@ -507,37 +422,175 @@
             color: var(--secondary);
         }
 
-        #contactModal {
-            position: fixed; /* stays in the same place when scrolling */
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%); /* perfectly center horizontally and vertically */
-            background: white;
-            width: 500px; /* you can adjust */
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-            padding:20px 0;
-        }
-        #contactModal .modal-content {
-            padding: 0;
-        }
-
         .form-message { display: none; margin-top: 0.75rem; border-radius: 8px; padding: 0.75rem 1rem; font-weight: 600; }
         .form-message.success { display: block; background: #D4F4DD; color: #1A7F37; }
         .form-message.error { display: block; background: #FEE2E2; color: #B91C1C; }
 
+            
+        /* -------------------------
+        Contact & Footer (updated)
+        ------------------------- */
         footer {
-            background-color: var(--primary);
-            color: var(--text-light);
-            padding: 2.5rem 1rem;
-            text-align: center;
+          background-color: var(--primary);
+          color: var(--text-light);
+          padding: 4rem 1rem 2rem;
         }
 
-        .footer-logo { width: 140px; display:block; margin: 0 auto 12px; }
-        .footer-policies { margin: 0.5rem 0 0; }
-        .footer-policies a { color: rgba(255,255,255,0.85); margin: 0 0.5rem; display:inline-block; }
-        .footer-policies a:hover { color: var(--secondary); }
-    
+        .footer-content {
+          max-width: 1280px;
+          margin: 0 auto;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 4rem;
+          align-items: start;
+        }
+
+        .footer-contact-form {
+          background: rgba(255,255,255,0.15);
+          backdrop-filter: blur(10px);
+          padding: 2rem;
+          border-radius: 16px;
+          border: 1px solid rgba(255,255,255,0.2);
+          box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .footer-contact-form h3 {
+          color: var(--light);
+          margin-bottom: 1.5rem;
+          font-size: 1.5rem;
+        }
+
+        .footer-info {
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+          padding-top: 1rem;
+        }
+
+        .footer-logo { 
+          width: 200px;
+          height: auto;
+        }
+
+        .footer-address {
+          display: flex;
+          align-items: flex-start;
+          gap: 0.75rem;
+          margin-top: 0.5rem;
+          opacity: 0.9;
+          font-size: 0.95rem;
+          line-height: 1.5;
+        }
+
+        .footer-address svg {
+          flex-shrink: 0;
+          margin-top: 0.25rem;
+        }
+
+        #footer-contact-form input,
+        #footer-contact-form textarea {
+          width: 100%;
+          padding: 0.85rem;
+          border: 1px solid rgba(255,255,255,0.3);
+          border-radius: 8px;
+          background: rgba(255,255,255,0.15);
+          color: var(--light);
+          margin-bottom: 1rem;
+          transition: all 0.2s ease;
+        }
+
+        #footer-contact-form input:focus,
+        #footer-contact-form textarea:focus {
+          background: rgba(255,255,255,0.25);
+          border-color: var(--secondary);
+          outline: none;
+          box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+        }
+
+        #footer-contact-form button {
+          background: var(--secondary);
+          color: var(--dark);
+          padding: 0.85rem 1.5rem;
+          border: none;
+          border-radius: 8px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          width: 100%;
+        }
+
+        #footer-contact-form button:hover {
+          background: var(--light);
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        #footer-icon {
+           transform: scale(1.5);
+        }
+
+        .footer-meta {
+          grid-column: 1 / -1;
+          text-align: center;
+          padding-top: 2rem;
+          margin-top: 2rem;
+          border-top: 1px solid rgba(255,255,255,0.15);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+          .footer-content {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+          }
+          
+          .footer-contact-form {
+            order: -1;
+          }
+          
+          .footer-info {
+            text-align: center;
+            align-items: center;
+          }
+          
+          .footer-address {
+            justify-content: center;
+          }
+        }
+
+        .footer-cta {
+          background: linear-gradient(135deg, rgba(76, 175, 80, 0.15), rgba(38, 34, 98, 0.25));
+          border-left: 4px solid var(--secondary);
+          padding: 1.5rem;
+          border-radius: 8px;
+          margin-bottom: 2rem;
+        }
+
+        .footer-cta-content {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+        }
+
+        .footer-cta-icon {
+          flex-shrink: 0;
+          width: 48px;
+          height: 48px;
+        }
+
+        .footer-cta-text h4 {
+          margin: 0 0 0.5rem 0;
+          color: var(--light);
+          font-size: 1.2rem;
+        }
+
+        .footer-cta-text p {
+          margin: 0;
+          color: rgba(255,255,255,0.85);
+          font-size: 0.95rem;
+          line-height: 1.5;
+        }
+        
         /* -------------------------
         Scroll to top
         ------------------------- */
@@ -598,7 +651,7 @@
     <nav>
       <a href="#features-section">Features</a>
       <a href="#how-it-works-section">How It Works</a>
-      <a href="#contact-section">Contact</a>
+      <a href="#footer-contact">Contact</a>
       <button id="signInBtn" class="signInBtn" type="button">Sign in</button>
     </nav>
   </header>
@@ -739,42 +792,6 @@
     </div>
   </section>
 
- <!-- Contact Modal -->
-<div id="contactModal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn">&times;</span>
-      <h2 class="prelogin-h2">Ready to Transform Your Operations?</h2>
-      <p class="contact-description">
-        Contact us to schedule a demo and discover how ShipIQ optimizes stowage planning.
-      </p>
-      <div id="form-message" class="form-message" role="status" aria-live="polite"></div>
-      <form id="contact-form" novalidate>
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input id="name" name="name" type="text" required />
-        </div>
-  
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" required />
-        </div>
-  
-        <div class="form-group">
-          <label for="company">Company</label>
-          <input id="company" name="company" type="text" required />
-        </div>
-  
-        <div class="form-group">
-          <label for="message">How can we help you?</label>
-          <textarea id="message" name="message" required></textarea>
-        </div>
-  
-        <button type="submit" class="cta-button cta-button-submit">Request Demo</button>
-      </form>
-    </div>
-  </div>
-
-
   <div id="scrollTopBtn" style="display:none;">
     <lottie-player 
       src="animation/Arrow Down Purple.json"  
@@ -786,25 +803,58 @@
     </lottie-player>
   </div>
 
-  <footer class="site-footer">
-  
-    <!-- Footer content -->
-    <div class="footer-content container">
-  
+<footer class="site-footer">
+  <div class="footer-content container">
+    <div class="footer-contact-form" id="footer-contact">
+      <h3>Ready to Transform Your Operations?</h3>
+      <p style="color: rgba(255,255,255,0.85); margin-bottom: 1.5rem;">
+        Contact us to schedule a demo and discover how ShipIQ optimizes stowage planning.
+      </p>
+      <form id="footer-contact-form" novalidate>
+        <input id="footer-name" name="name" type="text" placeholder="Your Name" required />
+        <input id="footer-email" name="email" type="email" placeholder="Email Address" required />
+        <input id="footer-company" name="company" type="text" placeholder="Company" required />
+        <textarea id="footer-message" name="message" placeholder="How can we help you?" required></textarea>
+        <button type="submit">Request Demo</button>
+      </form>
+    </div>
+
+    <div class="footer-info">
       <img class="footer-logo" src="images/Logo-2-white.png" alt="ShipIQ logo" />
-  
+
+      <div class="footer-cta">
+        <div class="footer-cta-content">
+          <div class="footer-cta-icon">
+            <div id="footer-icon" aria-hidden="true">
+              <lottie-player src="animation/trust.json" background="transparent" speed="0.5" loop autoplay></lottie-player>
+            </div>
+          </div>
+          <div class="footer-cta-text">
+            <h4>Chart a New Course Together</h4>
+            <p>Partner with us to navigate the future of intelligent stowage planning and optimize your maritime operations.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-address">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+          <circle cx="12" cy="10" r="3"></circle>
+        </svg>
+        <span>160 Robinson Road, #14-04<br>Singapore Business Federation Center<br>Singapore (068914)</span>
+      </div>
+    </div>
+
+    <div class="footer-meta">
       <div class="footer-policies">
         <a href="#" onclick="openModal('privacyModal')">Privacy Policy</a> |
         <a href="#" onclick="openModal('termsModal')">Terms of Service</a> |
-        <a href="#contact-section">Contact Us</a>
+        <a href="mailto:support@shipiq.ai">Email Us</a>
       </div>
-  
       <p>© 2025 ShipIQ.ai. All rights reserved.</p>
-      <p class="footer-address">
-        📍 160 Robinson Road, #14-04, Singapore Business Federation Center, Singapore (068914)
-      </p>
     </div>
-  </footer>
+  </div>
+</footer>
   
   
  <!-- Privacy Policy Modal -->
@@ -915,41 +965,6 @@ function handleSignIn(){
   alert("Sign in clicked!");
 }
 
-document.getElementById('contact-form').addEventListener('submit', function (e) {
-  e.preventDefault();
-  const formMessage = document.getElementById('form-message');
-  
-  const data = {
-    name: document.querySelector('[name="name"]').value,
-    email: document.querySelector('[name="email"]').value,
-    company: document.querySelector('[name="company"]').value,
-    message: document.querySelector('[name="message"]').value
-  };
-
-  fetch("https://script.google.com/macros/s/AKfycbzgoR0QGDWxe0Ljfb1TGm8wrOWND7RoHi0RTSYwPdgP9vg2qpMq1POQil9LoEc0QX4O9w/exec", {
-    method: "POST",
-    body: JSON.stringify(data),
-    headers: { "Content-Type": "application/json" }
-  })
-  .then(async res => {
-    if (!res.ok) throw new Error(await res.text());
-    return res.json();
-    })
-  .then(() => {
-    formMessage.className = 'form-message success';
-    formMessage.textContent = 'Thank you! Your request has been submitted.';
-    formMessage.style.display = 'block';
-    this.reset();
-    setTimeout(() => formMessage.style.display = 'none', 3000);
-  })
-  .catch(() => {
-    formMessage.className = 'form-message error';
-    formMessage.textContent = 'Oops! Something went wrong. Please try again.';
-    formMessage.style.display = 'block';
-  });
-});
-
-
 
 </script>
 
@@ -1027,6 +1042,61 @@ window.onclick = function(e) {
     window.scrollTo({ top: 0, behavior: "smooth" });
     });
 </script>
+
+<script>
+    // Update the form submission for the footer form
+    document.getElementById('footer-contact-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      
+      const data = {
+        name: document.getElementById('footer-name').value,
+        email: document.getElementById('footer-email').value,
+        company: document.getElementById('footer-company').value,
+        message: document.getElementById('footer-message').value
+      };
+
+      fetch("https://script.google.com/macros/s/AKfycbzgoR0QGDWxe0Ljfb1TGm8wrOWND7RoHi0RTSYwPdgP9vg2qpMq1POQil9LoEc0QX4O9w/exec", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" }
+      })
+      .then(async res => {
+        if (!res.ok) throw new Error(await res.text());
+        return res.json();
+      })
+      .then(() => {
+        alert('Thank you! Your request has been submitted.');
+        this.reset();
+      })
+      .catch(() => {
+        alert('Oops! Something went wrong. Please try again.');
+      });
+    });
+
+
+    // Add this to your existing JavaScript
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+          
+          // If mobile menu is open, close it (if you have one)
+          // document.getElementById('mobile-menu').classList.remove('open');
+        }
+      });
+    });
+
+    // Remove the modal-related JavaScript since we're not using it anymore
+    // [Keep all other existing JavaScript]
+  </script>
 
 </body>
 </html>
