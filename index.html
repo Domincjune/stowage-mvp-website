@@ -1043,9 +1043,9 @@
         </p>
         <!-- Loading spinner (initially hidden) -->
         <p id="successMessage">Message sent successfully!</p>    
-          <!-- Error Message -->
-          <p id="errorMessage">Something went wrong. Please try again.</p>    
-          <form id="footer-contact-form">
+        <!-- Error Message -->
+        <p id="errorMessage">Something went wrong. Please try again.</p>    
+        <form id="footer-contact-form">
           <input id="footer-name" name="name" type="text" placeholder="Your Name" required />
           <input id="footer-email" name="email" type="email" placeholder="Email Address" required />
           <input id="footer-company" name="company" type="text" placeholder="Company" required />
@@ -1361,10 +1361,18 @@ document.addEventListener('keydown', function(event) {
       .then(() => {
           document.getElementById("successMessage").style.display = "block";
           this.reset();
+           // Remove after 1 minute
+          setTimeout(() => {
+              document.getElementById("successMessage").style.display = "none";
+          }, 60000);
       })
       .catch(() => {
-          document.getElementById("successMessage").style.display = "block";
+          document.getElementById("errorMessage").style.display = "block";
           this.reset();
+           // Remove after 1 minute
+          setTimeout(() => {
+              document.getElementById("errorMessage").style.display = "none";
+          }, 60000);
       })
       .finally(() => {
           spinner.style.display = "none"; // hide spinner after request finishes
