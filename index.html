@@ -391,35 +391,166 @@
             margin-bottom: 1.2rem;
         }
 
-        /* Modal styles */
+        /* -------------------------
+          Enhanced Modal Styles
+          ------------------------- */
         .modal {
-            display: none; 
-            position: fixed; 
-            z-index: 2000; 
-            left: 0; top: 0;
-            width: 100%; height: 100%; 
-            overflow: auto;
-            background-color: rgba(0,0,0,0.6);
-            padding-top: 60px;
+          display: none;
+          position: fixed;
+          z-index: 2000;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0,0,0,0.7);
+          overflow: auto;
+          opacity: 0;
+          transition: opacity 0.3s ease;
         }
+
+        .modal.active {
+          display: flex;
+          justify-content: center;
+          align-items: flex-start;
+          opacity: 1;
+          padding: 40px 20px;
+        }
+
         .modal-content {
-            background-color: #fff;
-            margin: auto;
-            padding: 2rem;
-            border-radius: 12px;
-            width: 90%;
-            position: relative;
+          background-color: #fff;
+          margin: auto;
+          padding: 2.5rem;
+          border-radius: 12px;
+          width: 100%;
+          max-width: 800px;
+          max-height: 85vh;
+          overflow-y: auto;
+          position: relative;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+          transform: translateY(20px);
+          transition: transform 0.3s ease;
         }
+
+        .modal.active .modal-content {
+          transform: translateY(0);
+        }
+
         .close-btn {
-            position: absolute;
-            right: 16px;
-            top: 16px;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
+          position: absolute;
+          right: 1.5rem;
+          top: 1.5rem;
+          font-size: 1.8rem;
+          font-weight: 300;
+          color: var(--muted);
+          cursor: pointer;
+          transition: all 0.2s ease;
+          line-height: 1;
+          z-index: 10;
         }
+
         .close-btn:hover {
-            color: var(--secondary);
+          color: var(--primary);
+          transform: scale(1.1);
+        }
+
+        .modal h2 {
+          color: var(--primary);
+          font-size: 1.8rem;
+          margin-bottom: 1.5rem;
+          padding-right: 2rem;
+        }
+
+        .modal-body {
+          color: var(--text);
+          font-size: 0.95rem;
+          line-height: 1.7;
+        }
+
+        .modal-body p {
+          margin-bottom: 1.2rem;
+          color: var(--text);
+        }
+
+        .modal-body strong {
+          color: var(--primary);
+        }
+
+        .modal-body h3 {
+          color: var(--primary);
+          font-size: 1.2rem;
+          margin: 2rem 0 0.8rem;
+          font-weight: 600;
+        }
+
+        .modal-body ul {
+          padding-left: 1.2rem;
+          margin-bottom: 1.5rem;
+        }
+
+        .modal-body li {
+          margin-bottom: 0.6rem;
+        }
+
+        .scrollable-content {
+          max-height: 65vh;
+          overflow-y: auto;
+          padding-right: 1rem;
+        }
+
+        /* Scrollbar styling */
+        .scrollable-content::-webkit-scrollbar {
+          width: 6px;
+        }
+
+        .scrollable-content::-webkit-scrollbar-track {
+          background: rgba(0,0,0,0.05);
+          border-radius: 10px;
+        }
+
+        .scrollable-content::-webkit-scrollbar-thumb {
+          background: rgba(0,0,0,0.15);
+          border-radius: 10px;
+        }
+
+        .scrollable-content::-webkit-scrollbar-thumb:hover {
+          background: rgba(0,0,0,0.2);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+          .modal.active {
+            padding: 20px 10px;
+            align-items: center;
+          }
+          
+          .modal-content {
+            padding: 1.8rem 1.5rem;
+            max-height: 90vh;
+          }
+          
+          .modal h2 {
+            font-size: 1.5rem;
+          }
+          
+          .close-btn {
+            right: 1rem;
+            top: 1rem;
+            font-size: 1.5rem;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .modal-content {
+            padding: 1.5rem 1.2rem;
+          }
+          
+          .modal-body {
+            font-size: 0.9rem;
+          }
+          
+          .modal-body h3 {
+            font-size: 1.1rem;
+          }
         }
 
         .form-message { display: none; margin-top: 0.75rem; border-radius: 8px; padding: 0.75rem 1rem; font-weight: 600; }
@@ -428,8 +559,8 @@
 
             
         /* -------------------------
-        Contact & Footer (updated)
-        ------------------------- */
+          Contact & Footer (updated)
+          ------------------------- */
         footer {
           background-color: var(--primary);
           color: var(--text-light);
@@ -440,9 +571,21 @@
           max-width: 1280px;
           margin: 0 auto;
           display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 4rem;
+          grid-template-columns: 1fr 2fr 1fr;
+          gap: 2rem;
           align-items: start;
+        }
+
+        .footer-icon-container {
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          height: 100%;
+        }
+
+        #footer-icon {
+          width: 450px;
+          height: 450px;
         }
 
         .footer-contact-form {
@@ -452,6 +595,8 @@
           border-radius: 16px;
           border: 1px solid rgba(255,255,255,0.2);
           box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+          margin: 0 auto;
+          max-width: 500px;
         }
 
         .footer-contact-form h3 {
@@ -525,23 +670,25 @@
           box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
-        #footer-icon {
-           transform: scale(1.5);
-        }
-
         .footer-meta {
           grid-column: 1 / -1;
           text-align: center;
           padding-top: 2rem;
           margin-top: 2rem;
           border-top: 1px solid rgba(255,255,255,0.15);
+          font-size: 13px;
         }
 
         /* Responsive adjustments */
-        @media (max-width: 768px) {
+        @media (max-width: 992px) {
           .footer-content {
             grid-template-columns: 1fr;
             gap: 2rem;
+          }
+          
+          .footer-icon-container {
+            justify-content: center;
+            order: -2;
           }
           
           .footer-contact-form {
@@ -568,14 +715,8 @@
 
         .footer-cta-content {
           display: flex;
-          align-items: center;
+          align-items: flex-start;
           gap: 1rem;
-        }
-
-        .footer-cta-icon {
-          flex-shrink: 0;
-          width: 48px;
-          height: 48px;
         }
 
         .footer-cta-text h4 {
@@ -590,7 +731,29 @@
           font-size: 0.95rem;
           line-height: 1.5;
         }
-        
+
+        /* Add this to your existing CSS */
+        #footer-contact-form input::placeholder,
+        #footer-contact-form textarea::placeholder {
+          color: rgba(255, 255, 255, 0.7); /* Brighter placeholder text */
+          opacity: 1; /* Ensure full opacity */
+        }
+
+        #footer-contact-form input:-ms-input-placeholder,
+        #footer-contact-form textarea:-ms-input-placeholder {
+          color: rgba(255, 255, 255, 0.7); /* For IE */
+        }
+
+        #footer-contact-form input::-ms-input-placeholder,
+        #footer-contact-form textarea::-ms-input-placeholder {
+          color: rgba(255, 255, 255, 0.7); /* For Microsoft Edge */
+        }
+
+        /* Optional: Add transition for placeholder when focusing */
+        #footer-contact-form input:focus::placeholder,
+        #footer-contact-form textarea:focus::placeholder {
+          color: rgba(255, 255, 255, 0.5); /* Slightly fade when focused */
+        }
         /* -------------------------
         Scroll to top
         ------------------------- */
@@ -613,24 +776,81 @@
             background: rgba(255, 255, 255, 1);
         }  
 
+        #spinner {
+          display: none;
+          justify-content: center; /* Center horizontally */
+          align-items: center;     /* Center vertically if needed */
+          height: 100px;           /* Matches your design */
+          margin-bottom: 1rem;     /* Space between spinner and heading */
+        }
+
+        .loadingIcon {
+          width: 200px;
+          height: 200px;
+        }
+
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+
+        #successMessage {
+          display:none;
+          background-color: #e6ffed; 
+          color: #2d7a34; 
+          border: 1px solid #2d7a34; 
+          padding: 10px 15px; 
+          border-radius: 6px; 
+          font-family: Arial, sans-serif; 
+          font-size: 14px; 
+          box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+          margin-top: 15px;
+        }
+
+        #errorMessage {
+          display:none;
+          background-color: #fdecea; /* Soft red background */
+          color: #b71c1c; /* Darker red text for readability */
+          border: 1px solid #f5c6cb; /* Light red border */
+          padding: 10px 15px;
+          border-radius: 6px;
+          font-family: Arial, sans-serif;
+          font-size: 14px;
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+          margin-top: 15px;
+        }
+
         /* -------------------------
         Responsive tweaks
         ------------------------- */
         @media (max-width: 900px) {
-        .logo-img { width: 120px; }
-        .hero { padding: 4.5rem 1rem 3rem; }
-        .prelogin-h1 { font-size: 2rem; }
-        nav { gap: 0.5rem; }
-        .features .feature-card { flex-direction: row; }
+          .logo-img { width: 120px; }
+          .hero { padding: 4.5rem 1rem 3rem; }
+          .prelogin-h1 { font-size: 2rem; }
+          nav { gap: 0.5rem; }
+          .features .feature-card { flex-direction: row; }
+          #footer-icon {
+            width: auto;
+            height: auto;
+          }
         }
 
         @media (max-width: 560px) {
-        .logo-img { width: 100px; }
-        .logo-container { min-width: 120px; }
-        nav a { display: none; } /* simplified mobile nav - you can swap for a mobile menu */
-        .signInBtn { display: none; }
-        .features .feature-card { flex-direction: column; text-align: center; align-items: center; }
-        .features .feature-grid { text-align: center; }
+          .logo-img { width: 100px; }
+          .logo-container { min-width: 120px; }
+          nav a { display: none; } /* simplified mobile nav - you can swap for a mobile menu */
+          .signInBtn { display: none; }
+          .features .feature-card { flex-direction: column; text-align: center; align-items: center; }
+          .features .feature-grid { text-align: center; }
+          .logo-img { width: 120px; }
+          .hero { padding: 4.5rem 1rem 3rem; }
+          .prelogin-h1 { font-size: 2rem; }
+          nav { gap: 0.5rem; }
+          .features .feature-card { flex-direction: row; }
+          #footer-icon {
+            width: auto;
+            height: auto;
+          }
         }
 
         /* ---- particles/stats misc ---- */
@@ -760,7 +980,7 @@
 
 
 <!-- Testimonials -->
-<section class="testimonials" aria-label="Testimonials" style="background: linear-gradient(to bottom, #f7faff, #ffffff); padding: 4rem 0;">
+<!-- <section class="testimonials" aria-label="Testimonials" style="background: linear-gradient(to bottom, #f7faff, #ffffff); padding: 4rem 0;">
     <div class="container" style="max-width: 1100px; margin: auto; text-align: center;">
       <h2 class="prelogin-h2" style="margin-bottom: 0.5rem;">Industry Recognition</h2>
       <p style="color: var(--muted); margin-bottom: 2rem; font-size: 1.1rem;">
@@ -790,7 +1010,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <div id="scrollTopBtn" style="display:none;">
     <lottie-player 
@@ -803,169 +1023,284 @@
     </lottie-player>
   </div>
 
-<footer class="site-footer">
-  <div class="footer-content container">
-    <div class="footer-contact-form" id="footer-contact">
-      <h3>Ready to Transform Your Operations?</h3>
-      <p style="color: rgba(255,255,255,0.85); margin-bottom: 1.5rem;">
-        Contact us to schedule a demo and discover how ShipIQ optimizes stowage planning.
-      </p>
-      <form id="footer-contact-form" novalidate>
-        <input id="footer-name" name="name" type="text" placeholder="Your Name" required />
-        <input id="footer-email" name="email" type="email" placeholder="Email Address" required />
-        <input id="footer-company" name="company" type="text" placeholder="Company" required />
-        <textarea id="footer-message" name="message" placeholder="How can we help you?" required></textarea>
-        <button type="submit">Request Demo</button>
-      </form>
-    </div>
-
-    <div class="footer-info">
-      <img class="footer-logo" src="images/Logo-2-white.png" alt="ShipIQ logo" />
-
-      <div class="footer-cta">
-        <div class="footer-cta-content">
-          <div class="footer-cta-icon">
-            <div id="footer-icon" aria-hidden="true">
-              <lottie-player src="animation/trust.json" background="transparent" speed="0.5" loop autoplay></lottie-player>
-            </div>
-          </div>
-          <div class="footer-cta-text">
-            <h4>Chart a New Course Together</h4>
-            <p>Partner with us to navigate the future of intelligent stowage planning and optimize your maritime operations.</p>
-          </div>
+  <footer class="site-footer">
+    <div class="footer-content container">
+      <div class="footer-icon-container">
+        <div id="footer-icon" aria-hidden="true">
+          <lottie-player src="animation/trust.json" background="transparent" speed="0.5" loop autoplay></lottie-player>
         </div>
       </div>
       
-      <div class="footer-address">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-          <circle cx="12" cy="10" r="3"></circle>
-        </svg>
-        <span>160 Robinson Road, #14-04<br>Singapore Business Federation Center<br>Singapore (068914)</span>
+      <div class="footer-contact-form" id="footer-contact">
+        <div id="spinner">
+          <div class="loadingIcon">
+            <lottie-player src="animation/Loading_Paperplane.json" background="transparent" speed="1" loop autoplay></lottie-player>
+          </div>
+        </div>
+        <h3>Chart a New Course — Together</h3>
+        <p style="color: rgba(255,255,255,0.85); margin-bottom: 1.5rem;">
+          Partner with us to shape the future of intelligent stowage planning and unlock new efficiencies in your maritime operations.
+        </p>
+        <!-- Loading spinner (initially hidden) -->
+        <p id="successMessage">Message sent successfully!</p>    
+          <!-- Error Message -->
+          <p id="errorMessage">Something went wrong. Please try again.</p>    
+          <form id="footer-contact-form">
+          <input id="footer-name" name="name" type="text" placeholder="Your Name" required />
+          <input id="footer-email" name="email" type="email" placeholder="Email Address" required />
+          <input id="footer-company" name="company" type="text" placeholder="Company" required />
+          <textarea id="footer-message" name="message" placeholder="How can we help you?" required></textarea>
+          <button type="submit">Request Demo</button>
+        </form>
+      </div>
+  
+      <div class="footer-right-column">
+        <div class="footer-info">
+          <img class="footer-logo" src="images/Logo-2-white.png" alt="ShipIQ logo" />
+          <div class="footer-address">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span>160 Robinson Road, #14-04<br>Singapore Business Federation Center<br>Singapore (068914)</span>
+          </div>
+        </div>
+      
+        <div class="footer-meta">
+          <div class="footer-policies">
+            <a href="#" onclick="openModal('privacyModal')">Privacy Policy</a> |
+            <a href="#" onclick="openModal('termsModal')">Terms of Service</a>
+          </div>
+          <p style="font-size: 11px; margin-top: 2px;">© 2025 ShipIQ.ai. All rights reserved.</p>
+        </div>
       </div>
     </div>
-
-    <div class="footer-meta">
-      <div class="footer-policies">
-        <a href="#" onclick="openModal('privacyModal')">Privacy Policy</a> |
-        <a href="#" onclick="openModal('termsModal')">Terms of Service</a> |
-        <a href="mailto:support@shipiq.ai">Email Us</a>
-      </div>
-      <p>© 2025 ShipIQ.ai. All rights reserved.</p>
-    </div>
-  </div>
-</footer>
+  </footer>
   
   
- <!-- Privacy Policy Modal -->
+<!-- Privacy Policy Modal -->
 <div id="privacyModal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('privacyModal')">&times;</span>
-      <h2>Privacy Policy</h2>
-      <div class="modal-body scrollable-content">
-        <p><strong>Last Updated:</strong> August 9, 2025</p>
-  
-        <p>ShipIQ.ai ("we", "our", "us") respects your privacy and is committed to protecting your personal and business data. This Privacy Policy explains how we collect, use, and safeguard information when you use our B2B SaaS platform for optimizing cargo operations.</p>
-  
-        <h3>1. Information We Collect</h3>
-        <ul>
-          <li>Account Information: Name, company name, job title, email address, contact number.</li>
-          <li>Operational Data: Cargo details, vessel schedules, stowage plan information, and optimization parameters provided by you or generated by our AI models.</li>
-          <li>Usage Data: Login activity, feature usage, device/browser type, IP address, and cookies.</li>
-          <li>Support & Communication Records: Any inquiries, feedback, or support requests you send us.</li>
-        </ul>
-  
-        <h3>2. How We Use Your Information</h3>
-        <ul>
-          <li>Provide and improve our AI-driven stowage optimization services.</li>
-          <li>Customize your experience on our platform.</li>
-          <li>Communicate important updates, product enhancements, or maintenance notices.</li>
-          <li>Ensure system security, detect fraud, and comply with applicable laws.</li>
-          <li>Generate anonymized analytics for performance benchmarking.</li>
-        </ul>
-  
-        <h3>3. Data Sharing & Disclosure</h3>
-        <p>We do <strong>not</strong> sell your data. We may share data only with service providers, for legal compliance, or in business transactions such as mergers or acquisitions.</p>
-  
-        <h3>4. Data Security</h3>
-        <p>We use enterprise-grade encryption, secure servers, and role-based access control to protect your data.</p>
-  
-        <h3>5. Data Retention</h3>
-        <p>We retain operational data only as long as necessary for service delivery or as required by law.</p>
-  
-        <h3>6. International Data Transfers</h3>
-        <p>We ensure compliance with Singapore PDPA and EU GDPR for cross-border data transfers.</p>
-  
-        <h3>7. Your Rights</h3>
-        <p>You may request access, correction, or deletion of your personal data, opt-out of marketing, or restrict processing where applicable.</p>
-  
-        <h3>8. Cookies & Tracking</h3>
-        <p>We use cookies for authentication, analytics, and improving user experience.</p>
-  
-        <h3>9. Contact Us</h3>
-        <p><strong>ShipIQ.ai</strong><br>
-        160 Robinson Road, #14-04, Singapore Business Federation Center, Singapore (068914)<br>
-        Email: support@shipiq.ai</p>
-      </div>
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal('privacyModal')">&times;</span>
+    <h2>Privacy Policy</h2>
+    <div class="modal-body scrollable-content">
+      <p><strong>Last Updated:</strong> August 9, 2025</p>
+
+      <p>ShipIQ.ai ("we", "our", "us") respects your privacy and is committed to protecting your personal and business data. This Privacy Policy explains how we collect, use, and safeguard information when you use our B2B SaaS platform for optimizing cargo operations.</p>
+
+      <h3>1. Information We Collect</h3>
+      <ul>
+        <li><strong>Account Information:</strong> Name, company name, job title, email address, contact number.</li>
+        <li><strong>Operational Data:</strong> Cargo details, vessel schedules, stowage plan information, and optimization parameters provided by you or generated by our AI models.</li>
+        <li><strong>Maritime-Specific Data:</strong>
+          <ul>
+            <li>Vessel specifications (IMO numbers, dimensions, stability data)</li>
+            <li>Cargo details (hazardous material classifications, temperature requirements)</li>
+            <li>Port and terminal operational constraints</li>
+            <li>Voyage-specific data (ETA/ETD, bunker requirements)</li>
+          </ul>
+        </li>
+        <li><strong>Usage Data:</strong> Login activity, feature usage, device/browser type, IP address, and cookies.</li>
+        <li><strong>Support & Communication Records:</strong> Any inquiries, feedback, or support requests you send us.</li>
+      </ul>
+
+      <h3>2. How We Use Your Information</h3>
+      <ul>
+        <li>Provide and improve our AI-driven stowage optimization services.</li>
+        <li>Customize your experience on our platform.</li>
+        <li>Communicate important updates, product enhancements, or maintenance notices.</li>
+        <li>Ensure system security, detect fraud, and comply with applicable laws.</li>
+        <li>Generate anonymized analytics for performance benchmarking.</li>
+        <li>Ensure compliance with SOLAS, IMDG, and IMO regulations.</li>
+      </ul>
+
+      <h3>3. Data Sharing & Disclosure</h3>
+      <p>We do <strong>not</strong> sell your data. We may share data only with:</p>
+      <ul>
+        <li><strong>Subprocessors:</strong> Cloud providers (AWS, Azure), maritime data aggregators</li>
+        <li><strong>Legal Compliance:</strong> Port state control, flag state authorities, or court orders</li>
+        <li><strong>Business Transactions:</strong> Mergers, acquisitions, or asset sales</li>
+      </ul>
+
+      <h3>4. Data Security</h3>
+      <p>We use enterprise-grade security measures including:</p>
+      <ul>
+        <li><strong>Encryption:</strong> AES-256 for data at rest, TLS 1.3 for data in transit</li>
+        <li><strong>Access Controls:</strong> Role-based permissions (e.g., ship operators vs. shore staff)</li>
+        <li><strong>Audit Logs:</strong> Track all data modifications</li>
+      </ul>
+
+      <h3>5. Data Retention</h3>
+      <p>We retain data according to maritime industry standards:</p>
+      <ul>
+        <li><strong>Operational voyage data:</strong> 7 years (aligned with common maritime documentation requirements)</li>
+        <li><strong>User account data:</strong> Until account termination + 2 years</li>
+        <li><strong>Anonymized optimization data:</strong> Indefinitely for product improvement</li>
+      </ul>
+
+      <h3>6. International Data Transfers</h3>
+      <p>Given the global nature of shipping operations, data may be transferred to and processed in:</p>
+      <ul>
+        <li><strong>Singapore</strong> (Primary hosting location)</li>
+        <li><strong>EU/EEA countries</strong> (For European clients under GDPR)</li>
+        <li><strong>Other jurisdictions</strong> where our clients' vessels operate</li>
+      </ul>
+      <p>We implement Standard Contractual Clauses (SCCs) for all international transfers.</p>
+
+      <h3>7. Your Rights</h3>
+      <p>You may:</p>
+      <ul>
+        <li>Access, correct, or delete personal data</li>
+        <li>Opt out of marketing communications</li>
+        <li>Restrict processing for sensitive voyage data</li>
+        <li>Lodge complaints with supervisory authorities</li>
+      </ul>
+
+      <h3>8. Cookies & Tracking</h3>
+      <p>We use cookies for authentication, analytics, and improving user experience.</p>
+
+      <h3>9. Data Subject Rights for Seafarers</h3>
+      <p>We recognize special considerations for:</p>
+      <ul>
+        <li>Seafarer data processed through client accounts</li>
+        <li>Right to restrict processing during shore leave periods</li>
+        <li>Special protections for crew personal data under MLC 2006</li>
+      </ul>
+
+      <h3>10. Contact Us</h3>
+      <p><strong>ShipIQ.ai</strong><br>
+      160 Robinson Road, #14-04<br>
+      Singapore Business Federation Center<br>
+      Singapore (068914)<br>
+      Email: <a href="mailto:team@shipiq.ai">team@shipiq.ai</a></p>
     </div>
   </div>
-  
-  <!-- Terms of Service Modal -->
-  <div id="termsModal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('termsModal')">&times;</span>
-      <h2>Terms of Service</h2>
-      <div class="modal-body scrollable-content">
-        <p><strong>Last Updated:</strong> August 9, 2025</p>
-  
-        <h3>1. Definitions</h3>
-        <p>"Platform" refers to ShipIQ.ai’s SaaS solution. "Client" refers to the company or user accessing our services.</p>
-  
-        <h3>2. Use of Services</h3>
-        <p>You must have a valid account, provide accurate data, safeguard your credentials, and not use the service for unlawful purposes.</p>
-  
-        <h3>3. Intellectual Property</h3>
-        <p>All software, algorithms, and AI models are owned by ShipIQ.ai. Clients retain ownership of their data but grant us a license to process it.</p>
-  
-        <h3>4. Service Availability</h3>
-        <p>We strive for 99.9% uptime but are not liable for losses from downtime.</p>
-  
-        <h3>5. Fees & Payment</h3>
-        <p>All fees must be paid as per your agreement. Non-payment may result in suspension.</p>
-  
-        <h3>6. Data Accuracy & Liability</h3>
-        <p>Our AI plans are based on provided data; ShipIQ.ai is not liable for losses from recommendations.</p>
-  
-        <h3>7. Confidentiality</h3>
-        <p>We keep your cargo and operational data confidential, unless required by law to disclose.</p>
-  
-        <h3>8. Termination</h3>
-        <p>We may terminate your account for violations, non-payment, or misuse.</p>
-  
-        <h3>9. Governing Law</h3>
-        <p>These terms are governed by Singapore law.</p>
-  
-        <h3>10. Changes to Terms</h3>
-        <p>We may update these terms at any time. Continued use constitutes acceptance.</p>
-      </div>
+</div>
+
+<!-- Terms of Service Modal -->
+<div id="termsModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal('termsModal')">&times;</span>
+    <h2>Terms of Service</h2>
+    <div class="modal-body scrollable-content">
+      <p><strong>Last Updated:</strong> August 9, 2025</p>
+
+      <h3>1. Definitions</h3>
+      <p>"Platform" refers to ShipIQ.ai's SaaS solution. "Client" refers to the company or user accessing our services.</p>
+
+      <h3>2. Use of Services</h3>
+      <p>You must:</p>
+      <ul>
+        <li>Have a valid account</li>
+        <li>Provide accurate data</li>
+        <li>Safeguard your credentials</li>
+        <li>Not use the service for unlawful purposes</li>
+      </ul>
+      
+      <h4>2.4 Maritime Industry Requirements</h4>
+      <p>Client agrees to:</p>
+      <ul>
+        <li>Provide accurate vessel stability data as required by SOLAS regulations</li>
+        <li>Maintain proper backups of critical operational data</li>
+        <li>Ensure all data provided complies with IMDG Code when applicable</li>
+      </ul>
+
+      <h3>3. Intellectual Property</h3>
+      <ul>
+        <li>All software, algorithms, and AI models are owned by ShipIQ.ai</li>
+        <li>Clients retain ownership of their data but grant us a license to process it</li>
+      </ul>
+
+      <h3>4. Service Availability</h3>
+      <p>We strive for 99.9% uptime but are not liable for losses from downtime.</p>
+
+      <h3>5. Fees & Payment</h3>
+      <p>All fees must be paid as per your agreement. Non-payment may result in suspension.</p>
+
+      <h3>6. Data Accuracy & Liability</h3>
+      <p>Our AI plans are based on provided data; ShipIQ.ai is not liable for losses from recommendations.</p>
+      
+      <h4>6.1 Bunker Optimization Disclaimer</h4>
+      <p>Any fuel efficiency recommendations:</p>
+      <ul>
+        <li>Are estimates only</li>
+        <li>Depend on accurate vessel performance data</li>
+        <li>Should be verified against noon reports</li>
+        <li>Do not override master's discretion regarding safety</li>
+      </ul>
+
+      <h3>7. Confidentiality</h3>
+      <p>We keep your cargo and operational data confidential, unless required by law to disclose.</p>
+
+      <h3>8. Termination</h3>
+      <p>We may terminate your account for violations, non-payment, or misuse.</p>
+
+      <h3>9. Governing Law</h3>
+      <p>These terms are governed by Singapore law.</p>
+
+      <h3>10. Changes to Terms</h3>
+      <p>We may update these terms at any time. Continued use constitutes acceptance.</p>
+      
+      <h3>11. Force Majeure</h3>
+      <p>Includes maritime-specific events:</p>
+      <ul>
+        <li>Port closures or labor disputes</li>
+        <li>Adverse weather conditions affecting data transmission</li>
+        <li>Vessel connectivity issues in remote operations</li>
+        <li>Customs or regulatory delays</li>
+      </ul>
+      
+      <h3>12. Regulatory Compliance</h3>
+      <p>Client warrants that use of our services will comply with:</p>
+      <ul>
+        <li>International Maritime Organization (IMO) regulations</li>
+        <li>SOLAS Chapter VI (Carriage of Cargoes)</li>
+        <li>ISM Code requirements where applicable</li>
+        <li>Port state control requirements</li>
+      </ul>
+      
+      <h3>13. Contact Information</h3>
+      <p><strong>ShipIQ.ai</strong><br>
+      160 Robinson Road, #14-04<br>
+      Singapore Business Federation Center<br>
+      Singapore (068914)<br>
+      Email: <a href="mailto:team@shipiq.ai">team@shipiq.ai</a></p>
     </div>
   </div>
+</div>
   
 
 <script>
-
+// Enhanced modal functions with animations
 function openModal(id) {
-  document.getElementById(id).style.display = 'flex';
+  const modal = document.getElementById(id);
+  if (modal) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
 }
+
 function closeModal(id) {
-  document.getElementById(id).style.display = 'none';
+  const modal = document.getElementById(id);
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
 }
 
-function handleSignIn(){
-  alert("Sign in clicked!");
-}
+// Close modals when clicking outside or pressing ESC
+document.addEventListener('click', function(event) {
+  if (event.target.classList.contains('modal')) {
+    closeModal(event.target.id);
+  }
+});
 
-
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Escape') {
+    const openModals = document.querySelectorAll('.modal.active');
+    openModals.forEach(modal => closeModal(modal.id));
+  }
+});
 </script>
 
 <script>
@@ -1007,71 +1342,35 @@ function handleSignIn(){
   },
   retina_detect: true
 });
-// Open modal on click
-document.querySelectorAll('a[href="#contact-section"], .cta-button[href="#contact-section"]').forEach(btn => {
-  btn.addEventListener('click', e => {
-    e.preventDefault();
-    document.getElementById('contactModal').style.display = 'block';
-  });
-});
-
-// Close modal
-document.querySelector('.close-btn').onclick = () => {
-  document.getElementById('contactModal').style.display = 'none';
-};
-
-// Close when clicking outside content
-window.onclick = function(e) {
-  if (e.target.id === 'contactModal') {
-    document.getElementById('contactModal').style.display = 'none';
-  }
-};
-
-    // Scroll-to-top button logic
-    const scrollTopBtn = document.getElementById("scrollTopBtn");
-
-    window.addEventListener("scroll", () => {
-    if (window.scrollY > 200) {
-        scrollTopBtn.style.display = "block";
-    } else {
-        scrollTopBtn.style.display = "none";
-    }
-    });
-
-    scrollTopBtn.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    });
 </script>
 
 <script>
-    // Update the form submission for the footer form
-    document.getElementById('footer-contact-form').addEventListener('submit', function (e) {
+    document.getElementById("footer-contact-form").addEventListener("submit", function(e) {
       e.preventDefault();
-      
-      const data = {
-        name: document.getElementById('footer-name').value,
-        email: document.getElementById('footer-email').value,
-        company: document.getElementById('footer-company').value,
-        message: document.getElementById('footer-message').value
-      };
 
-      fetch("https://script.google.com/macros/s/AKfycbzgoR0QGDWxe0Ljfb1TGm8wrOWND7RoHi0RTSYwPdgP9vg2qpMq1POQil9LoEc0QX4O9w/exec", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: { "Content-Type": "application/json" }
+      let spinner = document.getElementById("spinner");
+      spinner.style.display = "flex"; // show spinner
+
+      let formData = new FormData(this);
+
+      fetch("https://script.google.com/macros/s/AKfycbwYi2DocccI4IEXJ7pC6MrNchgo9HL5VpQKZy4kbfMog0aP0JimN5ArYjQWWrJf27ebEw/exec", {
+          method: "POST",
+          body: formData
       })
-      .then(async res => {
-        if (!res.ok) throw new Error(await res.text());
-        return res.json();
-      })
+      .then(response => response.text())
       .then(() => {
-        alert('Thank you! Your request has been submitted.');
-        this.reset();
+          document.getElementById("successMessage").style.display = "block";
+          this.reset();
       })
       .catch(() => {
-        alert('Oops! Something went wrong. Please try again.');
+          document.getElementById("successMessage").style.display = "block";
+          this.reset();
+      })
+      .finally(() => {
+          spinner.style.display = "none"; // hide spinner after request finishes
       });
-    });
+  });
+
 
 
     // Add this to your existing JavaScript
