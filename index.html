@@ -588,7 +588,7 @@
           height: 450px;
         }
 
-        .footer-contact-form {
+        #footer-contact {
           background: rgba(255,255,255,0.15);
           backdrop-filter: blur(10px);
           padding: 2rem;
@@ -599,9 +599,9 @@
           max-width: 500px;
         }
 
-        .footer-contact-form h3 {
+        #footer-contact h3 {
           color: var(--light);
-          margin-bottom: 1.5rem;
+          margin-bottom: 10px;
           font-size: 1.5rem;
         }
 
@@ -1031,7 +1031,7 @@
         </div>
       </div>
       
-      <div class="footer-contact-form" id="footer-contact">
+      <div id="footer-contact">
         <div id="spinner">
           <div class="loadingIcon">
             <lottie-player src="animation/Loading_Paperplane.json" background="transparent" speed="1" loop autoplay></lottie-player>
@@ -1042,9 +1042,9 @@
           Partner with us to shape the future of intelligent stowage planning and unlock new efficiencies in your maritime operations.
         </p>
         <!-- Loading spinner (initially hidden) -->
-        <p id="successMessage">Message sent successfully!</p>    
+        <p id="successMessage">Thank you for reaching out! We've received your message and will get back to you within 1–2 business days.</p>    
         <!-- Error Message -->
-        <p id="errorMessage">Something went wrong. Please try again.</p>    
+        <p id="errorMessage">Oops, something went wrong. Please try again in a few minutes, or email us directly at team@shipiq.ai.</p>    
         <form id="footer-contact-form">
           <input id="footer-name" name="name" type="text" placeholder="Your Name" required />
           <input id="footer-email" name="email" type="email" placeholder="Email Address" required />
