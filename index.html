@@ -537,6 +537,17 @@
             top: 1rem;
             font-size: 1.5rem;
           }
+
+          .feature-card {
+            flex-direction: column;
+            text-align: center; /* Optional: centers text below icon */
+          }
+
+          .feature-icon,
+          .feature-content {
+            width: 100%;
+          }
+
         }
 
         @media (max-width: 480px) {
@@ -828,7 +839,7 @@
           .hero { padding: 4.5rem 1rem 3rem; }
           .prelogin-h1 { font-size: 2rem; }
           nav { gap: 0.5rem; }
-          .features .feature-card { flex-direction: row; }
+          .features .feature-card { flex-direction: column; }
           #footer-icon {
             width: auto;
             height: auto;
@@ -881,10 +892,10 @@
     <div id="particles-js" aria-hidden="true"></div>
     <div class="container">
       <h1 class="prelogin-h1">AI-Powered Stowage Planning</h1>
-      <p class="prelogin-p-subheading">Revolutionize maritime logistics with intelligent stowage solutions inspired by real captains and stability principles.</p>
+      <p class="prelogin-p-subheading">Capturing commercial opportunities by generating high-precision stowage plans, ready for review, export, and action.</p>
       <div class="cta-row">
-        <a class="cta-button" href="#contact-section">Request a demo</a>
-        <a class="cta-button secondary" href="#features-section">Explore features</a>
+        <a class="cta-button" href="#footer-contact">Talk to us!</a>
+        <!-- <a class="cta-button secondary" href="#features-section">Explore features</a> -->
       </div>
     </div>
   </section>
@@ -935,46 +946,40 @@
 <!-- How it works -->
 <section id="how-it-works-section" class="how-it-works">
     <div class="container">
-      <h2 class="prelogin-h2">Our Process</h2>
-      <p style="color:var(--muted); margin-bottom: 1rem;">ShipIQ transforms stowage planning into a smart, data-driven operation that evolves with every voyage.</p>
+      <h2 class="prelogin-h2">How ShipIQ Works?</h2>
+      <p style="color:var(--muted); margin-bottom: 1rem;">From cargo nomination to shipboard confirmation, an AI-powered loop that makes every plan smarter than the last.</p>
 
       <div class="steps" role="list">
         <div class="step" role="listitem">
           <div class="step-number">1</div>
-          <h4>Data Collection</h4>
-          <p>Analyze past voyage data, stowage records, and port characteristics to build a robust knowledge base.</p>
+          <h4>Cargo & Vessel Input</h4>
+          <p>Operators enter cargo details, vessel specs, and voyage constraints (MOLCO, MOLOO, SG, tank wash status).</p>
         </div>
 
         <div class="step" role="listitem">
           <div class="step-number">2</div>
-          <h4>Intelligent Search</h4>
-          <p>Quickly find similar past cases based on cargo types, routes, and port restrictions.</p>
+          <h4>AI-Generated Draft Plan</h4>
+          <p>ShipIQ instantly produces an optimized stowage suggestion based on tank logic, stability principles, and past patterns.</p>
         </div>
 
         <div class="step" role="listitem">
           <div class="step-number">3</div>
-          <h4>Smart Recommendations</h4>
-          <p>Receive optimal stowage patterns with risk highlights based on historical data.</p>
+          <h4>Operator Review & Adjust</h4>
+          <p>Ops teams tweak or validate the plan through an intuitive interface, keeping human expertise in control.</p>
         </div>
 
         <div class="step" role="listitem">
           <div class="step-number">4</div>
-          <h4>Automated Documentation</h4>
-          <p>Generate complete stowage plans with automated vessel communications.</p>
+          <h4>Export & Ship-Shore Exchange</h4>
+          <p>Finalized plan is exported in Excel/PDF for vessel use, ensuring seamless communication with existing workflows.</p>
         </div>
 
         <div class="step" role="listitem">
           <div class="step-number">5</div>
-          <h4>Captain Review</h4>
-          <p>Review and adjust plans with full context from historical data and recommendations.</p>
+          <h4>Learning Loop</h4>
+          <p>Each completed plan feeds back into ShipIQ’s models, improving accuracy and adaptability fleet-wide</p>
         </div>
 
-        <div class="step" role="listitem">
-          <div class="step-number">6</div>
-          <h4>Continuous Improvement</h4>
-          <p>Voyage results enhance the system, improving future recommendations.</p>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -1395,7 +1400,104 @@ document.addEventListener('keydown', function(event) {
 
     // Remove the modal-related JavaScript since we're not using it anymore
     // [Keep all other existing JavaScript]
-  </script>
 
+    window.addEventListener('scroll', () => {
+        const btn = document.getElementById('scrollTopBtn');
+        if (window.scrollY > 200) {
+            btn.style.display = 'block';
+        } else {
+            btn.style.display = 'none';
+        }
+    });
+
+    // Scroll smoothly to top on click
+    document.getElementById('scrollTopBtn').addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+  </script>
+  <script>
+  // Draw dotted connectors between steps: 1→2, 2→3, 3→4, 4→5, 5→1
+  (function () {
+    const pairs = [['step-1','step-2'], ['step-2','step-3'], ['step-3','step-4'], ['step-4','step-5'], ['step-5','step-1']];
+    const svg = () => document.querySelector('.connector-svg');
+
+    function clearSvg() {
+      const s = svg();
+      if (!s) return;
+      while (s.firstChild) s.removeChild(s.firstChild);
+    }
+
+    function draw() {
+      const s = svg();
+      if (!s) return;
+      clearSvg();
+      const svgRect = s.getBoundingClientRect();
+
+      pairs.forEach(([aClass, bClass]) => {
+        const a = document.querySelector('.' + aClass);
+        const b = document.querySelector('.' + bClass);
+        if (!a || !b) return;
+        const ar = a.getBoundingClientRect();
+        const br = b.getBoundingClientRect();
+
+        // decide anchor points to avoid lines crossing cards:
+        // - if elements are roughly on same row => horizontal connector between right edge of from and left edge of to at top-y (near number)
+        // - if elements are in same column => vertical connector from bottom of from to top of to
+        // - otherwise fallback to center-to-center
+        const sameRow = Math.abs(ar.top - br.top) < 36;
+        const sameCol = Math.abs((ar.left + ar.width/2) - (br.left + br.width/2)) < 36;
+
+        let x1,y1,x2,y2;
+
+        if (sameRow) {
+          // horizontal: y near top (align with numbers)
+          y1 = y2 = (ar.top - svgRect.top) + 22;
+          if (ar.left < br.left) {
+            x1 = (ar.left - svgRect.left) + ar.width - 8; // right edge (slightly inset)
+            x2 = (br.left - svgRect.left) + 8;           // left edge (slightly inset)
+          } else {
+            x1 = (ar.left - svgRect.left) + 8;
+            x2 = (br.left - svgRect.left) + br.width - 8;
+          }
+        } else if (sameCol) {
+          // vertical: x center, from bottom to top
+          x1 = x2 = (ar.left - svgRect.left) + ar.width/2;
+          if (ar.top < br.top) {
+            y1 = (ar.top - svgRect.top) + ar.height - 8; // bottom of a
+            y2 = (br.top - svgRect.top) + 8;             // top of b
+          } else {
+            y1 = (ar.top - svgRect.top) + 8;
+            y2 = (br.top - svgRect.top) + br.height - 8;
+          }
+        } else {
+          // fallback center-to-center
+          x1 = (ar.left + ar.width/2) - svgRect.left;
+          y1 = (ar.top + ar.height/2) - svgRect.top;
+          x2 = (br.left + br.width/2) - svgRect.left;
+          y2 = (br.top + br.height/2) - svgRect.top;
+        }
+
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', x1);
+        line.setAttribute('y1', y1);
+        line.setAttribute('x2', x2);
+        line.setAttribute('y2', y2);
+        line.setAttribute('class', 'connector-line');
+        s.appendChild(line);
+      });
+    }
+
+    // debounce utility
+    function debounce(fn, ms){ let t; return () => { clearTimeout(t); t = setTimeout(fn, ms); }; }
+
+    window.addEventListener('load', draw);
+    window.addEventListener('resize', debounce(draw, 120));
+    // if layout changes dynamically, redraw (optional)
+    new MutationObserver(debounce(draw, 120)).observe(document.querySelector('.steps') || document.body, {childList: true, subtree: true});
+  })();
+</script>
 </body>
 </html>
