@@ -286,83 +286,93 @@
         How it works / steps
         ------------------------- */
         .how-it-works {
-            padding: 4.5rem 1.5rem;
-            background: var(--light);
+          position: relative;
+          padding: 3rem 1rem;
         }
 
-        .steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1.25rem;
-            margin-top: 1.5rem;
+        .steps-grid {
+          display: flex;
+          justify-content: space-between;
+          margin: 2rem 0;
+          gap: 2rem;
+          z-index: 2;
+          position: relative;
+        }
+
+        .bottom-row {
+          justify-content: center;
+          gap: 120px;
         }
 
         .step {
-            background: var(--off-white);
-            padding: 1.25rem 1rem 1rem 1.25rem;
-            border-radius: 10px;
-            position: relative;
-            min-height: 110px;
+          background: #fff;
+          border-radius: 12px;
+          padding: 1rem 1.5rem;
+          text-align: center;
+          box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+          position: relative;
+          z-index: 2;
         }
 
         .step-number {
-            background-color: var(--primary);
-            color: var(--light);
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1rem;
-            position: absolute;
-            left: -18px;
-            top: 16px;
-            box-shadow: 0 6px 18px rgba(38,34,98,0.08);
+          width: 32px;
+          height: 32px;
+          margin: 0 auto 0.25rem;
+          border-radius: 50%;
+          background: #A5D6A7;      /* soft green */
+          color: #2E7D32;           /* darker number text */
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: bold;
+          font-size: 0.9rem;
         }
 
-        .how-it-works .steps {
-            display: flex;
-            justify-content: space-between; /* Keep steps in a row */
-            gap: 2rem;
-            flex-wrap: wrap; /* Allow wrapping on small screens */
+
+        .steps-connector {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          pointer-events: none;
+          z-index: 1;
         }
 
-        .how-it-works .step {
-            flex: 1 1 30%; /* Equal width for each step */
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            position: relative;
-            padding-left: 50px; /* Space for the number */
+        .steps-connector path {
+          stroke-dasharray: 8 8;
+          stroke-dashoffset: 1000;
+          animation: dashmove 25s linear infinite;
         }
 
-        .how-it-works .step-number {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: var(--primary);
-            color: var(--light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.2rem;
+        @keyframes dashmove {
+          to { stroke-dashoffset: 5; }
         }
 
-        .how-it-works .step h4 {
-            margin: 0 0 0.25rem;
+        @media (max-width: 768px) {
+          .steps-grid {
+            flex-direction: column;      /* stack steps vertically */
+            align-items: center;         /* center horizontally */
+            gap: 1.5rem;                 /* spacing between stacked steps */
+          }
+
+          .bottom-row {
+            justify-content: center;     /* center steps in second row */
+            gap: 1.5rem;
+          }
+
+          .steps-connector {
+            display: none;               /* hide the dotted line on mobile */
+          }
+
+          .step {
+            width: 90%;                  /* full-width cards with some margin */
+            text-align: center;
+          }
         }
 
-        .how-it-works .step p {
-            margin: 0;
-        }
 
-        /* -------------------------
+      /* -------------------------
         Testimonials
         ------------------------- */
         .testimonials {
@@ -942,46 +952,79 @@
     </div>
   </section>
   
-
 <!-- How it works -->
 <section id="how-it-works-section" class="how-it-works">
-    <div class="container">
-      <h2 class="prelogin-h2">How ShipIQ Works?</h2>
-      <p style="color:var(--muted); margin-bottom: 1rem;">From cargo nomination to shipboard confirmation, an AI-powered loop that makes every plan smarter than the last.</p>
+  <div class="container">
+    <h2 class="prelogin-h2">How ShipIQ Works?</h2>
+    <p style="color:var(--muted); margin-bottom: 1rem;">
+      From cargo nomination to shipboard confirmation, an AI-powered loop that makes every plan smarter than the last.
+    </p>
 
-      <div class="steps" role="list">
-        <div class="step" role="listitem">
-          <div class="step-number">1</div>
-          <h4>Cargo & Vessel Input</h4>
-          <p>Operators enter cargo details, vessel specs, and voyage constraints (MOLCO, MOLOO, SG, tank wash status).</p>
-        </div>
-
-        <div class="step" role="listitem">
-          <div class="step-number">2</div>
-          <h4>AI-Generated Draft Plan</h4>
-          <p>ShipIQ instantly produces an optimized stowage suggestion based on tank logic, stability principles, and past patterns.</p>
-        </div>
-
-        <div class="step" role="listitem">
-          <div class="step-number">3</div>
-          <h4>Operator Review & Adjust</h4>
-          <p>Ops teams tweak or validate the plan through an intuitive interface, keeping human expertise in control.</p>
-        </div>
-
-        <div class="step" role="listitem">
-          <div class="step-number">4</div>
-          <h4>Export & Ship-Shore Exchange</h4>
-          <p>Finalized plan is exported in Excel/PDF for vessel use, ensuring seamless communication with existing workflows.</p>
-        </div>
-
-        <div class="step" role="listitem">
-          <div class="step-number">5</div>
-          <h4>Learning Loop</h4>
-          <p>Each completed plan feeds back into ShipIQ’s models, improving accuracy and adaptability fleet-wide</p>
-        </div>
-
+    <!-- Steps -->
+    <div class="steps-grid">
+      <!-- Top row -->
+      <div class="step" role="listitem">
+        <div class="step-number">1</div>
+        <h4>Cargo & Vessel Input</h4>
+        <p>Operators enter cargo details, vessel specs, and voyage constraints (MOLCO, MOLOO, SG, tank wash status).</p>
+      </div>
+      <div class="step" role="listitem">
+        <div class="step-number">2</div>
+        <h4>AI-Generated Draft Plan</h4>
+        <p>ShipIQ instantly produces an optimized stowage suggestion based on tank logic, stability principles, and past patterns.</p>
+      </div>
+      <div class="step" role="listitem">
+        <div class="step-number">3</div>
+        <h4>Operator Review & Adjust</h4>
+        <p>Ops teams tweak or validate the plan through an intuitive interface, keeping human expertise in control.</p>
+      </div>
     </div>
-  </section>
+
+    <!-- Bottom row -->
+    <div class="steps-grid bottom-row">
+      <div class="step" role="listitem">
+        <div class="step-number">5</div>
+        <h4>Fleet Intelligence Loop</h4>
+        <p>Each completed plan feeds back into ShipIQ’s models, improving accuracy and adaptability fleet-wide.</p>
+      </div>
+      <div class="step" role="listitem">
+        <div class="step-number">4</div>
+        <h4>Export & Ship-Shore Exchange</h4>
+        <p>Finalized plan is exported in Excel/PDF for vessel use, ensuring seamless communication with existing workflows.</p>
+      </div>
+    </div>
+
+    <!-- Connector SVG -->
+    <svg class="steps-connector" viewBox="0 0 800 400" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <defs>
+        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="8" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" fill="var(--primary, #4CAF50)" />
+        </marker>
+      </defs>
+
+      <path d="M 100 100 H 600 
+               V 250 
+               H 350 
+               V 100 
+               Z"
+            fill="none"
+            stroke="var(--primary, #4CAF50)"
+            stroke-width="3"
+            stroke-dasharray="8 8"
+            stroke-linecap="round"
+            marker-end="url(#arrowhead)">
+        <animate attributeName="stroke-dashoffset" from="1000" to="0" dur="6s" repeatCount="indefinite"/>
+      </path>
+
+      <!-- Moving dot -->
+      <circle r="6" fill="var(--accent-strong, #3730a3)">
+        <animateMotion dur="6s" repeatCount="indefinite">
+          <mpath href="#steps-connector-path"/>
+        </animateMotion>
+      </circle>
+    </svg>
+  </div>
+</section>
 
 
 <!-- Testimonials -->
@@ -1426,86 +1469,92 @@ document.addEventListener('keydown', function(event) {
         });
     });
   </script>
-  <script>
-  // Draw dotted connectors between steps: 1→2, 2→3, 3→4, 4→5, 5→1
-  (function () {
-    const pairs = [['step-1','step-2'], ['step-2','step-3'], ['step-3','step-4'], ['step-4','step-5'], ['step-5','step-1']];
-    const svg = () => document.querySelector('.connector-svg');
 
-    function clearSvg() {
-      const s = svg();
-      if (!s) return;
-      while (s.firstChild) s.removeChild(s.firstChild);
+
+<script>
+(function () {
+  const container = document.querySelector('.how-it-works .container');
+  const svg       = container?.querySelector('.steps-connector');
+
+  if (!container || !svg) return;
+
+  const draw = () => {
+    // Select all steps
+    const steps = Array.from(container.querySelectorAll('.step'));
+    if (steps.length < 2) return;
+
+    const sRect = container.getBoundingClientRect();
+    svg.setAttribute('viewBox', `0 0 ${sRect.width} ${sRect.height}`);
+    svg.setAttribute('width', sRect.width);
+    svg.setAttribute('height', sRect.height);
+    svg.innerHTML = '';
+
+    // Get centers of each step
+    const centers = steps.map(el => {
+      const r = el.getBoundingClientRect();
+      return {
+        el,
+        x: (r.left - sRect.left) + r.width / 2,
+        y: (r.top - sRect.top) + r.height / 2
+      };
+    });
+
+    // Define the exact flow order
+    const order = [
+      centers.find(c => c.el.querySelector('.step-number').innerText === '1'),
+      centers.find(c => c.el.querySelector('.step-number').innerText === '2'),
+      centers.find(c => c.el.querySelector('.step-number').innerText === '3'),
+      centers.find(c => c.el.querySelector('.step-number').innerText === '4'),
+      centers.find(c => c.el.querySelector('.step-number').innerText === '5'),
+      centers.find(c => c.el.querySelector('.step-number').innerText === '1') // close loop
+    ];
+
+    // Build path
+    let d = `M ${order[0].x} ${order[0].y}`;
+    for (let i = 1; i < order.length; i++) {
+      d += ` L ${order[i].x} ${order[i].y}`;
     }
 
-    function draw() {
-      const s = svg();
-      if (!s) return;
-      clearSvg();
-      const svgRect = s.getBoundingClientRect();
+    // Create dotted path
+    const path = document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('d', d);
+    path.setAttribute('fill','none');
+    path.setAttribute('stroke', getComputedStyle(document.documentElement).getPropertyValue('--muted') || '#9ca3af');
+    path.setAttribute('stroke-width','2.5');
+    path.setAttribute('stroke-dasharray','8 8');
+    path.setAttribute('stroke-linecap','round');
+    path.setAttribute('id','steps-connector-path');
+    svg.appendChild(path);
 
-      pairs.forEach(([aClass, bClass]) => {
-        const a = document.querySelector('.' + aClass);
-        const b = document.querySelector('.' + bClass);
-        if (!a || !b) return;
-        const ar = a.getBoundingClientRect();
-        const br = b.getBoundingClientRect();
+    // Moving dot
+    const mover = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    mover.setAttribute('r','8');
+    mover.setAttribute('fill', getComputedStyle(document.documentElement).getPropertyValue('--accent-strong') || '#6366F1');
 
-        // decide anchor points to avoid lines crossing cards:
-        // - if elements are roughly on same row => horizontal connector between right edge of from and left edge of to at top-y (near number)
-        // - if elements are in same column => vertical connector from bottom of from to top of to
-        // - otherwise fallback to center-to-center
-        const sameRow = Math.abs(ar.top - br.top) < 36;
-        const sameCol = Math.abs((ar.left + ar.width/2) - (br.left + br.width/2)) < 36;
+    const animateMotion = document.createElementNS('http://www.w3.org/2000/svg','animateMotion');
+    animateMotion.setAttribute('dur','30s');
+    animateMotion.setAttribute('repeatCount','indefinite');
+    animateMotion.setAttribute('rotate','auto');
+    animateMotion.innerHTML = `<mpath href="#steps-connector-path" />`;
 
-        let x1,y1,x2,y2;
+    mover.appendChild(animateMotion);
+    svg.appendChild(mover);
+  };
 
-        if (sameRow) {
-          // horizontal: y near top (align with numbers)
-          y1 = y2 = (ar.top - svgRect.top) + 22;
-          if (ar.left < br.left) {
-            x1 = (ar.left - svgRect.left) + ar.width - 8; // right edge (slightly inset)
-            x2 = (br.left - svgRect.left) + 8;           // left edge (slightly inset)
-          } else {
-            x1 = (ar.left - svgRect.left) + 8;
-            x2 = (br.left - svgRect.left) + br.width - 8;
-          }
-        } else if (sameCol) {
-          // vertical: x center, from bottom to top
-          x1 = x2 = (ar.left - svgRect.left) + ar.width/2;
-          if (ar.top < br.top) {
-            y1 = (ar.top - svgRect.top) + ar.height - 8; // bottom of a
-            y2 = (br.top - svgRect.top) + 8;             // top of b
-          } else {
-            y1 = (ar.top - svgRect.top) + 8;
-            y2 = (br.top - svgRect.top) + br.height - 8;
-          }
-        } else {
-          // fallback center-to-center
-          x1 = (ar.left + ar.width/2) - svgRect.left;
-          y1 = (ar.top + ar.height/2) - svgRect.top;
-          x2 = (br.left + br.width/2) - svgRect.left;
-          y2 = (br.top + br.height/2) - svgRect.top;
-        }
+  // Redraw on resize & font load
+  const ro = new ResizeObserver(draw);
+  ro.observe(container);
+  window.addEventListener('resize', draw, { passive: true });
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(draw);
+  } else {
+    requestAnimationFrame(draw);
+  }
 
-        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        line.setAttribute('x1', x1);
-        line.setAttribute('y1', y1);
-        line.setAttribute('x2', x2);
-        line.setAttribute('y2', y2);
-        line.setAttribute('class', 'connector-line');
-        s.appendChild(line);
-      });
-    }
-
-    // debounce utility
-    function debounce(fn, ms){ let t; return () => { clearTimeout(t); t = setTimeout(fn, ms); }; }
-
-    window.addEventListener('load', draw);
-    window.addEventListener('resize', debounce(draw, 120));
-    // if layout changes dynamically, redraw (optional)
-    new MutationObserver(debounce(draw, 120)).observe(document.querySelector('.steps') || document.body, {childList: true, subtree: true});
-  })();
+  draw();
+})();
 </script>
+
+
 </body>
 </html>
