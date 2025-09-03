@@ -423,20 +423,20 @@
           justify-content: center;
           align-items: flex-start;
           opacity: 1;
-          padding: 40px 20px;
+          padding: 50px 25px;
         }
 
         .modal-content {
           background-color: #fff;
           margin: auto;
-          padding: 2.5rem;
-          border-radius: 12px;
+          padding: 3rem 3.2rem;
+          border-radius: 14px;
           width: 100%;
-          max-width: 800px;
+          max-width: 960px; /* wider for a professional layout */
           max-height: 85vh;
           overflow-y: auto;
           position: relative;
-          box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+          box-shadow: 0 12px 36px rgba(0,0,0,0.25);
           transform: translateY(20px);
           transition: transform 0.3s ease;
         }
@@ -447,9 +447,9 @@
 
         .close-btn {
           position: absolute;
-          right: 1.5rem;
-          top: 1.5rem;
-          font-size: 1.8rem;
+          right: 1.8rem;
+          top: 1.8rem;
+          font-size: 2rem;
           font-weight: 300;
           color: var(--muted);
           cursor: pointer;
@@ -457,7 +457,6 @@
           line-height: 1;
           z-index: 10;
         }
-
         .close-btn:hover {
           color: var(--primary);
           transform: scale(1.1);
@@ -465,19 +464,21 @@
 
         .modal h2 {
           color: var(--primary);
-          font-size: 1.8rem;
-          margin-bottom: 1.5rem;
-          padding-right: 2rem;
+          font-size: 2.2rem;
+          margin-bottom: 1.8rem;
+          padding-right: 2.5rem;
+          border-bottom: 2px solid #f1f1f1;
+          padding-bottom: 0.8rem;
         }
 
         .modal-body {
           color: var(--text);
-          font-size: 0.95rem;
-          line-height: 1.7;
+          font-size: 1rem;
+          line-height: 1.75;
         }
 
         .modal-body p {
-          margin-bottom: 1.2rem;
+          margin-bottom: 1.5rem;
           color: var(--text);
         }
 
@@ -487,18 +488,20 @@
 
         .modal-body h3 {
           color: var(--primary);
-          font-size: 1.2rem;
-          margin: 2rem 0 0.8rem;
+          font-size: 1.4rem;
+          margin: 2.2rem 0 1rem;
           font-weight: 600;
+          border-left: 4px solid var(--primary);
+          padding-left: 0.6rem;
         }
 
         .modal-body ul {
-          padding-left: 1.2rem;
-          margin-bottom: 1.5rem;
+          padding-left: 1.4rem;
+          margin-bottom: 2rem;
         }
 
         .modal-body li {
-          margin-bottom: 0.6rem;
+          margin-bottom: 0.7rem;
         }
 
         .scrollable-content {
@@ -511,68 +514,50 @@
         .scrollable-content::-webkit-scrollbar {
           width: 6px;
         }
-
         .scrollable-content::-webkit-scrollbar-track {
           background: rgba(0,0,0,0.05);
           border-radius: 10px;
         }
-
         .scrollable-content::-webkit-scrollbar-thumb {
           background: rgba(0,0,0,0.15);
           border-radius: 10px;
         }
-
         .scrollable-content::-webkit-scrollbar-thumb:hover {
-          background: rgba(0,0,0,0.2);
+          background: rgba(0,0,0,0.25);
         }
 
         /* Responsive adjustments */
         @media (max-width: 768px) {
           .modal.active {
-            padding: 20px 10px;
+            padding: 25px 12px;
             align-items: center;
           }
-          
           .modal-content {
-            padding: 1.8rem 1.5rem;
+            padding: 2rem 1.6rem;
             max-height: 90vh;
           }
-          
           .modal h2 {
-            font-size: 1.5rem;
+            font-size: 1.7rem;
           }
-          
           .close-btn {
-            right: 1rem;
-            top: 1rem;
-            font-size: 1.5rem;
+            right: 1.2rem;
+            top: 1.2rem;
+            font-size: 1.6rem;
           }
-
-          .feature-card {
-            flex-direction: column;
-            text-align: center; /* Optional: centers text below icon */
-          }
-
-          .feature-icon,
-          .feature-content {
-            width: 100%;
-          }
-
         }
 
         @media (max-width: 480px) {
           .modal-content {
-            padding: 1.5rem 1.2rem;
+            padding: 1.6rem 1.2rem;
           }
-          
           .modal-body {
-            font-size: 0.9rem;
+            font-size: 0.92rem;
           }
-          
           .modal-body h3 {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
           }
         }
+
 
         .form-message { display: none; margin-top: 0.75rem; border-radius: 8px; padding: 0.75rem 1rem; font-weight: 600; }
         .form-message.success { display: block; background: #D4F4DD; color: #1A7F37; }
@@ -892,7 +877,7 @@
     <nav>
       <a href="#features-section">Features</a>
       <a href="#how-it-works-section">How It Works</a>
-      <a href="#footer-contact">Contact</a>
+      <a href="#" onclick="openModal('careersModal')">Careers</a>
       <button id="signInBtn" class="signInBtn" type="button">Sign in</button>
     </nav>
   </header>
@@ -1124,8 +1109,51 @@
       </div>
     </div>
   </footer>
-  
-  
+
+<div id="careersModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal('careersModal')">&times;</span>
+    
+    <h2>Careers at ShipIQ.ai</h2>
+    <p><strong>About Us:</strong> ShipIQ.ai is building the future of smart shipping and logistics technology from Singapore. We use AI and automation to optimize stowage planning, fleet operations, and logistics efficiency worldwide. If you are passionate about creating impactful solutions in a high-growth industry, this is the place for you.</p>
+
+    <h3>🚀 Software Development Engineer (Founding Team Member)</h3>
+    <p>We are looking for our <strong>first engineering hire</strong> to join ShipIQ.ai. This is a rare opportunity to be at the core of our journey and help shape both our product and company culture.</p>
+
+    <h4>What You’ll Do</h4>
+    <ul>
+      <li>Design, develop, and maintain high-performance web applications.</li>
+      <li>Build seamless, user-friendly UIs using <strong>React.js, JavaScript (ES6+), HTML5, CSS3</strong>.</li>
+      <li>Develop robust backend services with <strong>Python, Flask, FastAPI</strong>.</li>
+      <li>Write clean, test-driven, and maintainable code.</li>
+      <li>Collaborate directly with founders on product direction and priorities.</li>
+      <li>Take ownership of projects end-to-end, ensuring quality and scalability.</li>
+    </ul>
+
+    <h4>What We’re Looking For</h4>
+    <ul>
+      <li><strong>Experience:</strong> 4–5+ years in software development</li>
+      <li><strong>Frontend expertise:</strong> React.js, JavaScript (ES6+), HTML5, CSS3</li>
+      <li><strong>Backend expertise:</strong> Python, Flask, FastAPI</li>
+      <li><strong>Nice-to-have:</strong> Familiarity with machine learning algorithms</li>
+      <li>Passion for creativity, accountability, and building meaningful technology</li>
+    </ul>
+
+    <h4>Why Join Us?</h4>
+    <ul>
+      <li>Be our <strong>first engineering hire</strong> with real influence on product and culture</li>
+      <li>Flat, inclusive team structure—every opinion matters</li>
+      <li>Remote-first culture + ESOPs (your contribution builds ownership)</li>
+      <li>Plenty of growth opportunities as a founding member</li>
+      <li>A culture built on honesty, equality, and talent over titles</li>
+    </ul>
+
+    <p><strong>📩 To apply:</strong> Send your resume and a short note to <a href="mailto:team@shipiq.ai">team@shipiq.ai</a></p>
+  </div>
+</div>
+
+
+
 <!-- Privacy Policy Modal -->
 <div id="privacyModal" class="modal">
   <div class="modal-content">
@@ -1134,96 +1162,77 @@
     <div class="modal-body scrollable-content">
       <p><strong>Last Updated:</strong> August 9, 2025</p>
 
-      <p>ShipIQ.ai ("we", "our", "us") respects your privacy and is committed to protecting your personal and business data. This Privacy Policy explains how we collect, use, and safeguard information when you use our B2B SaaS platform for optimizing cargo operations.</p>
+      <section>
+        <p>At <strong>ShipIQ.ai</strong>, we respect your privacy and are committed to safeguarding your personal and business information. This Privacy Policy outlines how we collect, use, and protect your data when you use our AI-driven cargo optimization platform.</p>
+      </section>
 
-      <h3>1. Information We Collect</h3>
-      <ul>
-        <li><strong>Account Information:</strong> Name, company name, job title, email address, contact number.</li>
-        <li><strong>Operational Data:</strong> Cargo details, vessel schedules, stowage plan information, and optimization parameters provided by you or generated by our AI models.</li>
-        <li><strong>Maritime-Specific Data:</strong>
-          <ul>
-            <li>Vessel specifications (IMO numbers, dimensions, stability data)</li>
-            <li>Cargo details (hazardous material classifications, temperature requirements)</li>
-            <li>Port and terminal operational constraints</li>
-            <li>Voyage-specific data (ETA/ETD, bunker requirements)</li>
-          </ul>
-        </li>
-        <li><strong>Usage Data:</strong> Login activity, feature usage, device/browser type, IP address, and cookies.</li>
-        <li><strong>Support & Communication Records:</strong> Any inquiries, feedback, or support requests you send us.</li>
-      </ul>
+      <section>
+        <h3>1. Information We Collect</h3>
+        <ul>
+          <li><strong>Account Information:</strong> Name, company name, job title, email, phone number.</li>
+          <li><strong>Operational Data:</strong> Cargo details, vessel schedules, stowage plans, and AI optimization outputs.</li>
+          <li><strong>Maritime-Specific Data:</strong> Vessel specs, hazardous cargo data, port restrictions, voyage data.</li>
+          <li><strong>Usage Data:</strong> Login activity, feature usage, device/browser type, IP address, cookies.</li>
+          <li><strong>Support Records:</strong> Queries, feedback, or communication with our team.</li>
+        </ul>
+      </section>
 
-      <h3>2. How We Use Your Information</h3>
-      <ul>
-        <li>Provide and improve our AI-driven stowage optimization services.</li>
-        <li>Customize your experience on our platform.</li>
-        <li>Communicate important updates, product enhancements, or maintenance notices.</li>
-        <li>Ensure system security, detect fraud, and comply with applicable laws.</li>
-        <li>Generate anonymized analytics for performance benchmarking.</li>
-        <li>Ensure compliance with SOLAS, IMDG, and IMO regulations.</li>
-      </ul>
+      <section>
+        <h3>2. How We Use Your Information</h3>
+        <ul>
+          <li>Provide and improve our AI optimization services.</li>
+          <li>Enhance user experience and customization.</li>
+          <li>Send updates, product changes, and service notices.</li>
+          <li>Ensure compliance with maritime regulations (SOLAS, IMO, IMDG).</li>
+          <li>Generate anonymized analytics for product improvement.</li>
+        </ul>
+      </section>
 
-      <h3>3. Data Sharing & Disclosure</h3>
-      <p>We do <strong>not</strong> sell your data. We may share data only with:</p>
-      <ul>
-        <li><strong>Subprocessors:</strong> Cloud providers (AWS, Azure), maritime data aggregators</li>
-        <li><strong>Legal Compliance:</strong> Port state control, flag state authorities, or court orders</li>
-        <li><strong>Business Transactions:</strong> Mergers, acquisitions, or asset sales</li>
-      </ul>
+      <section>
+        <h3>3. Data Sharing</h3>
+        <p>We never sell your data. We only share with:</p>
+        <ul>
+          <li><strong>Service Providers:</strong> Cloud and data partners (e.g., AWS, Azure).</li>
+          <li><strong>Authorities:</strong> When legally required (port state, flag state).</li>
+          <li><strong>Business Transactions:</strong> In mergers, acquisitions, or restructures.</li>
+        </ul>
+      </section>
 
-      <h3>4. Data Security</h3>
-      <p>We use enterprise-grade security measures including:</p>
-      <ul>
-        <li><strong>Encryption:</strong> AES-256 for data at rest, TLS 1.3 for data in transit</li>
-        <li><strong>Access Controls:</strong> Role-based permissions (e.g., ship operators vs. shore staff)</li>
-        <li><strong>Audit Logs:</strong> Track all data modifications</li>
-      </ul>
+      <section>
+        <h3>4. Security & Retention</h3>
+        <ul>
+          <li><strong>Security:</strong> AES-256 encryption, TLS 1.3, role-based access, and audit logs.</li>
+          <li><strong>Retention:</strong> Voyage data kept 7 years, account data until closure + 2 years, anonymized data indefinitely.</li>
+        </ul>
+      </section>
 
-      <h3>5. Data Retention</h3>
-      <p>We retain data according to maritime industry standards:</p>
-      <ul>
-        <li><strong>Operational voyage data:</strong> 7 years (aligned with common maritime documentation requirements)</li>
-        <li><strong>User account data:</strong> Until account termination + 2 years</li>
-        <li><strong>Anonymized optimization data:</strong> Indefinitely for product improvement</li>
-      </ul>
+      <section>
+        <h3>5. International Data Transfers</h3>
+        <p>Your data may be processed in Singapore, EU/EEA, and other jurisdictions. We follow <strong>Standard Contractual Clauses (SCCs)</strong> to ensure protection.</p>
+      </section>
 
-      <h3>6. International Data Transfers</h3>
-      <p>Given the global nature of shipping operations, data may be transferred to and processed in:</p>
-      <ul>
-        <li><strong>Singapore</strong> (Primary hosting location)</li>
-        <li><strong>EU/EEA countries</strong> (For European clients under GDPR)</li>
-        <li><strong>Other jurisdictions</strong> where our clients' vessels operate</li>
-      </ul>
-      <p>We implement Standard Contractual Clauses (SCCs) for all international transfers.</p>
+      <section>
+        <h3>6. Your Rights</h3>
+        <ul>
+          <li>Access, correct, or delete personal data.</li>
+          <li>Opt out of communications.</li>
+          <li>Restrict sensitive data processing.</li>
+          <li>File complaints with regulators.</li>
+        </ul>
+      </section>
 
-      <h3>7. Your Rights</h3>
-      <p>You may:</p>
-      <ul>
-        <li>Access, correct, or delete personal data</li>
-        <li>Opt out of marketing communications</li>
-        <li>Restrict processing for sensitive voyage data</li>
-        <li>Lodge complaints with supervisory authorities</li>
-      </ul>
-
-      <h3>8. Cookies & Tracking</h3>
-      <p>We use cookies for authentication, analytics, and improving user experience.</p>
-
-      <h3>9. Data Subject Rights for Seafarers</h3>
-      <p>We recognize special considerations for:</p>
-      <ul>
-        <li>Seafarer data processed through client accounts</li>
-        <li>Right to restrict processing during shore leave periods</li>
-        <li>Special protections for crew personal data under MLC 2006</li>
-      </ul>
-
-      <h3>10. Contact Us</h3>
-      <p><strong>ShipIQ.ai</strong><br>
-      160 Robinson Road, #14-04<br>
-      Singapore Business Federation Center<br>
-      Singapore (068914)<br>
-      Email: <a href="mailto:team@shipiq.ai">team@shipiq.ai</a></p>
+      <section>
+        <h3>7. Contact Us</h3>
+        <p><strong>ShipIQ.ai</strong><br>
+        160 Robinson Road, #14-04<br>
+        Singapore Business Federation Center<br>
+        Singapore (068914)<br>
+        Email: <a href="mailto:team@shipiq.ai">team@shipiq.ai</a></p>
+      </section>
     </div>
   </div>
 </div>
+
 
 <!-- Terms of Service Modal -->
 <div id="termsModal" class="modal">
@@ -1231,91 +1240,71 @@
     <span class="close-btn" onclick="closeModal('termsModal')">&times;</span>
     <h2>Terms of Service</h2>
     <div class="modal-body scrollable-content">
-      <p><strong>Last Updated:</strong> August 9, 2025</p>
+      <p><strong>Last Updated:</strong> September 3, 2025</p>
 
-      <h3>1. Definitions</h3>
-      <p>"Platform" refers to ShipIQ.ai's SaaS solution. "Client" refers to the company or user accessing our services.</p>
+      <p>Welcome to <strong>ShipIQ.ai</strong>. These Terms of Service ("Terms") govern your access to and use of our platform, services, and applications (collectively, the "Services"). By using our Services, you agree to these Terms. If you do not agree, please discontinue use immediately.</p>
 
-      <h3>2. Use of Services</h3>
-      <p>You must:</p>
+      <h3>1. Eligibility</h3>
+      <p>You must be at least 18 years old to use our Services. By creating an account, you represent and warrant that you are legally able to enter into these Terms.</p>
+
+      <h3>2. Account Responsibilities</h3>
       <ul>
-        <li>Have a valid account</li>
-        <li>Provide accurate data</li>
-        <li>Safeguard your credentials</li>
-        <li>Not use the service for unlawful purposes</li>
-      </ul>
-      
-      <h4>2.4 Maritime Industry Requirements</h4>
-      <p>Client agrees to:</p>
-      <ul>
-        <li>Provide accurate vessel stability data as required by SOLAS regulations</li>
-        <li>Maintain proper backups of critical operational data</li>
-        <li>Ensure all data provided complies with IMDG Code when applicable</li>
+        <li>You must provide accurate and complete information during registration.</li>
+        <li>You are responsible for maintaining the confidentiality of your account credentials.</li>
+        <li>You agree to notify us immediately if you suspect unauthorized use of your account.</li>
       </ul>
 
-      <h3>3. Intellectual Property</h3>
+      <h3>3. Subscription, Payments & Taxes</h3>
       <ul>
-        <li>All software, algorithms, and AI models are owned by ShipIQ.ai</li>
-        <li>Clients retain ownership of their data but grant us a license to process it</li>
+        <li>Some Services require payment. By subscribing, you agree to pay all applicable fees according to our billing cycles.</li>
+        <li>All fees are exclusive of applicable taxes, duties, or levies.</li>
+        <li>Refunds, if applicable, will be subject to our refund policy communicated at purchase.</li>
       </ul>
 
-      <h3>4. Service Availability</h3>
-      <p>We strive for 99.9% uptime but are not liable for losses from downtime.</p>
-
-      <h3>5. Fees & Payment</h3>
-      <p>All fees must be paid as per your agreement. Non-payment may result in suspension.</p>
-
-      <h3>6. Data Accuracy & Liability</h3>
-      <p>Our AI plans are based on provided data; ShipIQ.ai is not liable for losses from recommendations.</p>
-      
-      <h4>6.1 Bunker Optimization Disclaimer</h4>
-      <p>Any fuel efficiency recommendations:</p>
+      <h3>4. Intellectual Property</h3>
       <ul>
-        <li>Are estimates only</li>
-        <li>Depend on accurate vessel performance data</li>
-        <li>Should be verified against noon reports</li>
-        <li>Do not override master's discretion regarding safety</li>
+        <li>ShipIQ.ai retains all rights, title, and interest in the platform, including software, designs, and algorithms.</li>
+        <li>You retain ownership of the data you upload.</li>
+        <li>We grant you a limited, non-exclusive, revocable license to access and use our Services.</li>
       </ul>
 
-      <h3>7. Confidentiality</h3>
-      <p>We keep your cargo and operational data confidential, unless required by law to disclose.</p>
+      <h3>5. Data Privacy & Compliance</h3>
+      <p>We are committed to protecting your privacy and complying with global standards including GDPR and CCPA. Please review our <a href="#" onclick="openModal('privacyModal')">Privacy Policy</a> for details on how we collect, process, and store data.</p>
 
-      <h3>8. Termination</h3>
-      <p>We may terminate your account for violations, non-payment, or misuse.</p>
+      <h3>6. Service Availability</h3>
+      <p>We strive to keep our Services available and secure but cannot guarantee uninterrupted access. Maintenance, updates, or unforeseen outages may occur.</p>
 
-      <h3>9. Governing Law</h3>
-      <p>These terms are governed by Singapore law.</p>
-
-      <h3>10. Changes to Terms</h3>
-      <p>We may update these terms at any time. Continued use constitutes acceptance.</p>
-      
-      <h3>11. Force Majeure</h3>
-      <p>Includes maritime-specific events:</p>
+      <h3>7. Prohibited Uses</h3>
       <ul>
-        <li>Port closures or labor disputes</li>
-        <li>Adverse weather conditions affecting data transmission</li>
-        <li>Vessel connectivity issues in remote operations</li>
-        <li>Customs or regulatory delays</li>
+        <li>Reverse engineering, modifying, or copying our software without authorization.</li>
+        <li>Using Services for unlawful, fraudulent, or harmful activities.</li>
+        <li>Exporting or re-exporting to sanctioned countries in violation of applicable trade laws.</li>
       </ul>
-      
-      <h3>12. Regulatory Compliance</h3>
-      <p>Client warrants that use of our services will comply with:</p>
+
+      <h3>8. Machine Learning & AI Disclaimer</h3>
+      <p>Our Services may provide insights and recommendations using AI and machine learning algorithms. These outputs are intended to assist decision-making but should not be treated as definitive or as a substitute for professional judgment. You remain solely responsible for operational and commercial decisions.</p>
+
+      <h3>9. Limitation of Liability</h3>
+      <p>To the maximum extent permitted by law, ShipIQ.ai shall not be liable for indirect, incidental, or consequential damages. Our total liability is limited to the fees you paid us in the 12 months preceding the claim.</p>
+
+      <h3>10. Termination</h3>
       <ul>
-        <li>International Maritime Organization (IMO) regulations</li>
-        <li>SOLAS Chapter VI (Carriage of Cargoes)</li>
-        <li>ISM Code requirements where applicable</li>
-        <li>Port state control requirements</li>
+        <li>We may suspend or terminate access if you violate these Terms, fail to pay fees, or misuse the Services.</li>
+        <li>Upon termination, your right to access Services ceases. We may retain or delete your data as required by law or policy.</li>
       </ul>
-      
-      <h3>13. Contact Information</h3>
-      <p><strong>ShipIQ.ai</strong><br>
-      160 Robinson Road, #14-04<br>
-      Singapore Business Federation Center<br>
-      Singapore (068914)<br>
-      Email: <a href="mailto:team@shipiq.ai">team@shipiq.ai</a></p>
+
+      <h3>11. Governing Law & Dispute Resolution</h3>
+      <p>These Terms shall be governed by the laws of Singapore. Any disputes shall be resolved through binding arbitration in Singapore, unless otherwise required by applicable law.</p>
+
+      <h3>12. Changes to Terms</h3>
+      <p>We may update these Terms from time to time. Material changes will be communicated at least 30 days in advance. Continued use of the Services constitutes acceptance of updated Terms.</p>
+
+      <h3>13. Contact Us</h3>
+      <p>If you have any questions about these Terms, please contact us at: <a href="mailto:team@shipiq.ai">team@shipiq.ai</a></p>
     </div>
   </div>
 </div>
+
   
 
 <script>
